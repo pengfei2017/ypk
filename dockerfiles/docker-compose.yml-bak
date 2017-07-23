@@ -1,0 +1,50 @@
+version: '3.1'
+
+services:
+
+    database:
+        build:
+          context: ./registration-database
+        image: reg.hepengfei.com:5000/registration-database:latest
+        # mount point for application in tomcat
+        volumes:
+            - UserSignup:/var/lib/mysql
+        # set default mysql root password, change as needed
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+        # Expose port 3306 to host. Not for the application but
+        # handy to inspect the database from the host machine.
+        ports:
+            - "3306:3306"
+        networks:
+            - myjavanet
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
+    webserver:
+        build:
+          context: .
+          dockerfile: ./registration-webserver/Dockerfile
+        image: reg.hepengfei.com:5000/registration-webserver:latest
+        depends_on:
+            - database
+        # open ports for tomcat and remote debugging
+        ports:
+            - "8080:8080"
+            - "8000:8000"
+        networks:
+            - myjavanet
+        deploy:
+            replicas: 2
+            update_config:
+                parallelism: 2
+            restart_policy:
+                condition: on-failure
+
+volumes:
+    UserSignup:
+
+networks:
+    myjavanet:
+        driver: overlay
