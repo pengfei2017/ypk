@@ -23,6 +23,8 @@ RUN pecl install redis \
     && pecl install xdebug \
     && docker-php-ext-enable redis xdebug
 
+RUN docker-php-ext-install mysqli
+
 # 开启rewrite模块
 RUN a2enmod rewrite
 
