@@ -1,0 +1,45 @@
+<div id="cti">
+    <div class="wrapper">
+        <ul>
+            <?php if (isset($contract_list)) {?>
+                <?php foreach($contract_list as $k=>$v){?>
+                    <?php if($v['cti_descurl']){ ?>
+                        <li>
+                            <span class="line"></span>
+                            <a href="<?php echo $v['cti_descurl'];?>" target="_blank">
+                                <span class="icon">
+                                    <img style="width: 60px;" src="<?php echo $v['cti_icon_url_60']; ?>" />
+                                </span>
+                                <span class="name"> <?php echo $v['cti_name']; ?> </span>
+                            </a>
+                        </li>
+                    <?php }else{ ?>
+                        <li>
+                            <span class="line"></span>
+                            <span class="icon">
+                                <img style="width: 60px;" src="<?php echo $v['cti_icon_url_60']; ?>" />
+                            </span>
+                            <span class="name"> <?php echo $v['cti_name']; ?> </span>
+                        </li>
+                    <?php }?>
+                <?php }?>
+            <?php }?>
+        </ul>
+    </div>
+</div>
+<div id="footer" class="wrapper">
+    <p><a href="<?php echo SHOP_SITE_URL;?>"><?php echo $lang->_('nc_index');?></a>
+        <?php if(!empty($nav_list) && is_array($nav_list)){?>
+            <?php foreach($nav_list as $nav){?>
+                <?php if($nav['nav_location'] == '2'){?>
+                    | <a  <?php if($nav['nav_new_open']){?>target="_blank" <?php }?>href="<?php switch($nav['nav_type']){
+                        case '0':echo $nav['nav_url'];break;
+                        case '1':echo getUrl('shop/search/index', array('cate_id'=>$nav['item_id']));break;
+                        case '2':echo getUrl('member/article/article', array('ac_id'=>$nav['item_id']));break;
+                        case '3':echo getUrl('shop/activity/index', array('activity_id'=>$nav['item_id']));break;
+                    }?>"><?php echo $nav['nav_title'];?></a>
+                <?php }?>
+            <?php }?>
+        <?php }?>
+    </p>
+

@@ -1,0 +1,43 @@
+<style type="text/css">
+    table {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    table tr, table th, table td {
+        border: solid 1px #000;
+        line-height: 35px;
+        height: 35px;
+        text-align: center;
+    }
+    .ulArea{
+        font-size: 0.7rem;
+        border-bottom: solid 1px #ccc;
+        padding-bottom: 10px;
+        margin-top: 10px;
+    }
+    .ulArea .item {
+        text-align: left;
+        margin-top: 10px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        ajaxLoad(-1);
+    });
+
+    function ajaxLoad(member_id) {
+        $.post("<?php echo getUrl('shop/case_history/ajax_load')?>",{"member_id":member_id},function (data) {
+            $(".ulArea").html(data);
+        },null);
+    }
+</script>
+
+<select id="userList">
+    <option value="-1">--请选择购买用户--</option>
+    <?php echo $output['option_list'] ?>
+</select>
+<ul class="ulArea">
+<!--    <li class="item"><a href="case_history_detail.html?caseid=1">我的病历1</a></li>-->
+<!--    <li class="item">我的病历2</li>-->
+</ul>

@@ -1,0 +1,122 @@
+<link href="/admin_resource/css/index.css" rel="stylesheet" type="text/css"/>
+<form id="user_form"
+      enctype="multipart/form-data" method="post">
+    <input type="hidden" name="form_submit" value="ok"/>
+    <div class="ncap-form-default">
+        <?php if (count($member_chat_card) > 0) { ?>
+            <dl class="row">
+                <dt class="tit"><span>选择聊天卡</span></dt>
+                <dd class="opt">
+                    <ul class="ncap-account-container-list">
+                        <?php $first = 1; ?>
+                        <?php foreach ($member_chat_card as $chat_card) { ?>
+                            <?php if ($chat_card['chat_card_start_time'] >= time()) { ?>
+                                <li title="不可用" style="width: 460px; display: block;">
+                                    <input disabled="disabled" data-time="<?php echo $chat_card['how_lang_time']; ?>"
+                                           data-order-id="<?php echo $chat_card['order_id']; ?>"
+                                           data-member-id="<?php echo $chat_card['member_id']; ?>"
+                                           data-card-type="<?php echo $chat_card['card_type']; ?>" name="id"
+                                           data-exchange-code="<?php echo $chat_card['exchange_code']; ?>"
+                                           value="<?php echo $chat_card['id']; ?>" type="radio"><label
+                                            for="hao_sms_type">时长：<?php echo $chat_card['how_lang_time']; ?>
+                                        秒（还未开始，开始时间：<?php echo date('Y-m-d H:i:s', $chat_card['chat_card_start_time']); ?>
+                                        ）</label>
+                                </li>
+                            <?php } else { ?>
+                                <li title="可用" style="width: 460px; display: block;">
+                                    <input data-time="<?php echo $chat_card['how_lang_time']; ?>"
+                                           data-order-id="<?php echo $chat_card['order_id']; ?>"
+                                           data-member-id="<?php echo $chat_card['member_id']; ?>"
+                                           data-card-type="<?php echo $chat_card['card_type']; ?>"
+                                           data-exchange-code="<?php echo $chat_card['exchange_code']; ?>"
+                                           data-chat-card-end-time="<?php echo $chat_card['chat_card_end_time']; ?>"
+                                           name="id"
+                                           value="<?php echo $chat_card['id']; ?>" type="radio" <?php if ($first == 1) {
+                                        echo "checked=\"checked\"";
+                                        $first = 2;
+                                    } ?>><label
+                                            for="hao_sms_type">时长：<?php echo $chat_card['how_lang_time']; ?>
+                                        秒（已经开始）</label>
+                                </li>
+                            <?php } ?>
+                        <?php } ?>
+                    </ul>
+                    <span class="err"></span>
+                </dd>
+            </dl>
+            <div class="bot"><a href="JavaScript:void(0);" class="ncap-btn-big ncap-btn-green"
+                                id="submitBtn">开始聊天</a></div>
+        <?php } else { ?>
+            <div style="padding: 20px;">
+                你还没有与该医生的聊天卡>><a href="/search/index?cate_id=1076&doctor_id=<?php echo $_GET['doctor_id']; ?>"
+                                 target="_blank">现在去购买</a>
+            </div>
+        <?php } ?>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        //按钮先执行验证再提交表单
+        $("#submitBtn").click(function () {
+            if ($("#user_form").valid()) {
+                //警告：chat_card要在$('.dialog_close_button').click()之前执行，因为在$('.dialog_close_button').click()代码执行之后，窗口关闭，页面就没有要找的html元素了
+                var chat_card = $('.ncap-account-container-list').find('input[name=id]:checked');
+
+                $('.dialog_close_button').click();
+
+                $.ajax({
+                    url: '<?php echo getUrl('chat/web_chat/member_chat_card_list'); ?>',
+                    type: 'POST', //GET
+                    async: false,    //同步
+                    dataType: 'json',
+                    data: {
+                        id: chat_card.val(),
+                        form_submit: 'ok'
+                    },
+                    success: function (data) {
+                        if (data.status == 1) {
+                            var end_time = new Date().getTime() + parseInt(chat_card.attr('data-time')) * 1000;
+                            var card_type = chat_card.attr('data-card-type');
+                            var order_id = chat_card.attr('data-order-id');
+                            var member_id = chat_card.attr('data-member-id');
+                            var exchange_code = chat_card.attr('data-exchange-code');
+                            //服务结束时间
+                            var chat_card_end_time = parseInt(chat_card.attr('data-chat-card-end-time')) * 1000;
+                            if (end_time > chat_card_end_time) {
+                                end_time = chat_card_end_time;
+                            }
+                            if (end_time <= new Date().getTime()) {
+                                showError('服务时间已经结束');
+                                return false;
+                            }
+                            var is_evaluate = 0; //是否对该聊天卡已进行评价
+                            $.cookie('chat_time_<?php echo $_GET['doctor_id'];?>_' + member_id, chat_card.val() + '_' + end_time + '_' + card_type + '_' + order_id + '_' + exchange_code + '_' + is_evaluate, {
+                                expires: 1, //单位是天
+                                path: '/'
+                            }); //单位是秒，不是毫秒
+                            chat(<?php echo $_GET['doctor_id'];?>);
+                        } else {
+                            showDialog('操作失败，请重试！', 'alert', null, null, 1, null, null, null, null, 2, null);
+                        }
+                    }
+                });
+            }
+        });
+        $('#user_form').validate({
+            errorPlacement: function (error, element) {
+                var error_td = element.parent('dd').children('span.err');
+                error_td.append(error);
+            },
+            rules: {
+                id: {
+                    required: true
+                }
+            },
+            messages: {
+                id: {
+                    required: '<i class="fa fa-exclamation-circle"></i>请选择聊天卡'
+                }
+            }
+        });
+    });
+</script>

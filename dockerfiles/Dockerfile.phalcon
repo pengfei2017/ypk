@@ -1,0 +1,33 @@
+FROM php:apache
+
+LABEL hepengfei <1149426299@qq.com>
+
+ENV PHALCON_VERSION=3.2.1
+ENV PHALCON_DEV_TOOLS_VERSION=3.2.0
+
+# Compile Phalcon
+RUN set -xe && \
+curl -LO https://github.com/phalcon/cphalcon/archive/v${PHALCON_VERSION}.tar.gz && \
+tar xzf v${PHALCON_VERSION}.tar.gz && cd cphalcon-${PHALCON_VERSION}/build && ./install && \
+docker-php-ext-enable phalcon && \
+cd ../.. && rm -rf v${PHALCON_VERSION}.tar.gz cphalcon-${PHALCON_VERSION} && \
+# Insall Phalcon Devtools, see https://github.com/phalcon/phalcon-devtools/
+curl -LO https://github.com/phalcon/phalcon-devtools/archive/v${PHALCON_DEV_TOOLS_VERSION}.tar.gz && \
+tar xzf v${PHALCON_DEV_TOOLS_VERSION}.tar.gz && \
+mv phalcon-devtools-${PHALCON_DEV_TOOLS_VERSION} /usr/local/phalcon-devtools && \
+ln -s /usr/local/phalcon-devtools/phalcon.php /usr/local/bin/phalcon
+
+# 用PECL（PHP 扩展库仓库）安装php插件的工具包，该处安装redis扩展和xdebug扩展并启用这两个扩展
+RUN pecl install igbinary && docker-php-ext-enable igbinary
+RUN pecl install redis \
+    && pecl install xdebug \
+    && docker-php-ext-enable redis xdebug
+
+# 开启rewrite模块
+RUN a2enmod rewrite
+
+CMD ["apache2-foreground"]
+
+# COPY config/php.ini /usr/local/etc/php/
+
+# docker build -f ./dockerfiles/Dockerfile.phalcon -t hepengfei2017/phalcon:latest .

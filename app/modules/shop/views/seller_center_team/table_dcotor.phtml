@@ -1,0 +1,111 @@
+<style type="text/css">
+    table {
+        width: 100%;
+    }
+
+    table tr, table th, table td {
+        border: solid 1px #000;
+        line-height: 35px;
+        height: 35px;
+        text-align: center;
+    }
+
+    .member_list .member_id {
+        margin-top: -20px;
+    }
+
+    .member_list .member {
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .member_list .member:hover {
+        color: red;
+        text-decoration: underline;
+    }
+
+    .member_list .member_name {
+        color: green;
+        #A4BFB3
+    }
+
+    .member_list .member_id {
+        color: #A4BFB3;
+    }
+
+    .member_list .member_empty {
+        color: #ccc;
+    }
+
+    .member_info {
+        margin-top: 30px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        $(".member_list .member").click(function () {
+            var member_id = $(this).attr("data-id"); //获取会员id
+            window.location = "<?php echo getUrl('shop/seller_center_team/table_dcotor');?>?member_id=" + member_id;
+        });
+        $(".member_list .member").hover(function () {
+            var member_id = $(this).attr("data-id"); //获取会员id
+            //var member_name = $(this).attr("data-name"); //获取会员姓名
+            //var member_typeId = $(this).attr("data-typeId"); //获取会员身份id
+            $.post("<?php echo getUrl('shop/seller_center_team/getMemberInfo');?>", {"member_id": member_id}, function (data) {
+                $(".member_info").html(data);
+            }, null);
+        });
+    });
+</script>
+
+
+<div style="width: 973px;margin: 10px auto 0;">
+
+    <table class="member_list">
+        <?php echo $output['mapStr'] ?>
+    </table>
+
+
+    <table class="member_info">
+        <?php echo $output['member_info_str'] ?>
+    </table>
+    <!--    <table class="member_info">-->
+    <!--        <tr>-->
+    <!--            <td>电话：</td>-->
+    <!--            <td colspan="2">15890614693</td>-->
+    <!--        </tr>-->
+    <!--        <tr>-->
+    <!--            <td>电子邮箱：</td>-->
+    <!--            <td colspan="2">15890614693@qq.com</td>-->
+    <!--        </tr>-->
+    <!--        <tr>-->
+    <!--            <td>账户积分累计：</td>-->
+    <!--            <td colspan="2">金牌/5005</td>-->
+    <!--        </tr>-->
+    <!--        <tr>-->
+    <!--            <td>注册日期/升级日期：</td>-->
+    <!--            <td colspan="2">2016.11.12/2015.12.12</td>-->
+    <!--        </tr>-->
+    <!--        <tr style="background-color: #419638;color: #fff;font-weight: bold;">-->
+    <!--            <td>周期</td>-->
+    <!--            <td>左区消费积分</td>-->
+    <!--            <td>右区消费积分</td>-->
+    <!--        </tr>-->
+    <!--        <tr>-->
+    <!--            <td>2016.09.15-2016.10.14</td>-->
+    <!--            <td>300</td>-->
+    <!--            <td>500</td>-->
+    <!--        </tr>-->
+    <!--        <tr>-->
+    <!--            <td>2016.10.15-2016.11.14</td>-->
+    <!--            <td>500</td>-->
+    <!--            <td>300</td>-->
+    <!--        </tr>-->
+    <!--        <tr>-->
+    <!--            <td>2016.11.15-2016.12.14</td>-->
+    <!--            <td>500</td>-->
+    <!--            <td>800</td>-->
+    <!--        </tr>-->
+    <!--    </table>-->
+</div>

@@ -1,0 +1,142 @@
+<link rel="stylesheet" type="text/css" href="<?php echo RESOURCE_SITE_URL;?>/js/jquery-ui/themes/ui-lightness/jquery.ui.css"  />
+<style type="text/css">
+    i{
+        color:red;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $('#company_address').nc_region(); //加载“省市县”三级联动列表
+        $("#profile_form").validate({
+            errorPlacement: function(error, element){
+                element.nextAll('span').first().after(error);
+            },
+            rules:{
+                member_truename:{ //真实姓名
+                    required: true
+                },
+                business_departments:{ //科室
+                    required: true
+                },
+                business_professional:{ //职称
+                    required: true
+                },
+                business_lockHospital:{ //定点医院
+                    required: true
+                },
+                company_address:{ //地区（省市县三级形式）
+                    required: true
+                },
+                company_address_detail:{ //详细地址
+                    required: true
+                }
+            },
+            messages:{
+                member_truename:{ //真实姓名
+                    required: '真实姓名不能为空'
+                },
+                business_departments:{ //科室
+                    required: '科室不能为空'
+                },
+                business_professional:{ //职称
+                    required: '职称不能为空'
+                },
+                business_lockHospital:{ //定点医院
+                    required: '定点医院不能为空'
+                },
+                company_address:{ //地区（省市县三级形式）
+                    required: '地区不能为空'
+                },
+                company_address_detail:{ //详细地址
+                    required: '详细地址不能为空'
+                }
+            }
+        });
+    });
+
+
+</script>
+<div class="wrap">
+    <div class="ncm-default-form">
+        <form method="post" id="profile_form">
+            <input type="hidden" name="form_submit" value="ok" />
+            <dl>
+                <dt><i>*</i>真实姓名：</dt>
+                <dd>
+                    <span class="w200">
+                        <input type="text" class="text" maxlength="20" name="member_truename" value="<?php echo $output['store_join_info']['business_sphere']?>" />
+                    </span>
+                </dd>
+            </dl>
+            <dl>
+                <dt><i>*</i>科室：</dt>
+                <dd>
+                    <span class="w400">
+                        <input type="text" class="text w400" maxlength="20" name="business_departments" value="<?php echo $output['store_join_info']['business_departments']?>" />
+                    </span>
+                </dd>
+            </dl>
+            <dl>
+                <dt><i>*</i>职称：</dt>
+                <dd>
+                    <span class="w400">
+                        <input type="text" class="text w400" maxlength="20" name="business_professional" value="<?php echo $output['store_join_info']['business_professional']?>" />
+                    </span>
+                </dd>
+            </dl>
+            <dl>
+                <dt><i>*</i>定点医院：</dt>
+                <dd>
+                    <span class="w400">
+                        <input type="text" class="text w400" maxlength="20" name="business_lockHospital" value="<?php echo $output['store_join_info']['business_lockHospital']?>" />
+                    </span>
+                </dd>
+            </dl>
+            <dl>
+                <dt>活动医院：</dt>
+                <dd>
+                    <span class="w400">
+                        <input type="text" class="text w600" placeholder="（选填）多个医院之间用逗号隔开" maxlength="20" name="business_activeHospital" value="<?php echo $output['store_join_info']['business_activeHospital']?>" />（选填，多个医院之间用英文逗号隔开）
+                    </span>
+                </dd>
+            </dl>
+            <dl>
+                <dt><i>*</i>地区：</dt>
+                <dd>
+                    <input id="company_address" name="company_address" type="hidden" value=""/>
+                    <span></span>
+                </dd>
+            </dl>
+            <dl>
+                <dt><i>*</i>详细地址：</dt>
+                <dd>
+                    <span class="w600">
+                        <input type="text" class="text w600" maxlength="20" name="company_address_detail" value="<?php echo $output['store_join_info']['company_address_detail']?>" />
+                    </span>
+                </dd>
+            </dl>
+            <dl>
+                <dt>身份证号：</dt>
+                <dd>
+                    <span class="w400">
+                        <input type="text" class="text w400" placeholder="（选填）" maxlength="20" name="business_idcard_number" value="<?php echo $output['store_join_info']['business_idcard_number']?>" />
+                    </span>
+                </dd>
+            </dl>
+            <dl>
+                <dt>个人简介：</dt>
+                <dd>
+                    <?php showEditor('mail_content', '','590px','300px','visibility:hidden',true,false,'all','store');?>
+                </dd>
+            </dl>
+            <dl class="bottom">
+                <dt></dt>
+                <dd>
+                    <label class="submit-border">
+                        <input type="submit" class="submit" value="提交保存" />
+                    </label>
+                </dd>
+            </dl>
+        </form>
+    </div>
+</div>

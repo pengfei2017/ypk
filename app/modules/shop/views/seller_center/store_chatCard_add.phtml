@@ -1,0 +1,756 @@
+<?php
+/**
+ * 聊天卡添加详情页面
+ */
+?>
+<script src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.ajaxContent.pack.js"></script>
+<script src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"></script>
+<script src="<?php echo RESOURCE_SITE_URL; ?>/js/common_select.js"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/fileupload/jquery.iframe-transport.js"
+        charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/fileupload/jquery.ui.widget.js"
+        charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/fileupload/jquery.fileupload.js"
+        charset="utf-8"></script>
+<script src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.poshytip.min.js"></script>
+<script src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.charCount.js"></script>
+<!--[if lt IE 8]>
+<script src="<?php echo RESOURCE_SITE_URL;?>/js/json2.js"></script>
+<![endif]-->
+<script src="<?php echo MODULE_RESOURCE; ?>/js/store_goods_add.step2.js"></script>
+<script src="<?php echo MODULE_RESOURCE; ?>/js/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" type="text/css"
+      href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/ui-lightness/jquery.ui.css"/>
+<style type="text/css">
+    #fixedNavBar {
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#CCFFFFFF', endColorstr='#CCFFFFFF');
+        background: rgba(255, 255, 255, 0.8);
+        width: 90px;
+        margin-left: 510px;
+        border-radius: 4px;
+        position: fixed;
+        z-index: 999;
+        top: 172px;
+        left: 50%;
+    }
+
+    #fixedNavBar h3 {
+        font-size: 12px;
+        line-height: 24px;
+        text-align: center;
+        margin-top: 4px;
+    }
+
+    #fixedNavBar ul {
+        width: 80px;
+        margin: 0 auto 5px auto;
+    }
+
+    #fixedNavBar li {
+        margin-top: 5px;
+    }
+
+    #fixedNavBar li a {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        line-height: 20px;
+        background-color: #F5F5F5;
+        color: #999;
+        text-align: center;
+        display: block;
+        height: 20px;
+        border-radius: 10px;
+    }
+
+    #fixedNavBar li a:hover {
+        color: #FFF;
+        text-decoration: none;
+        background-color: #27a9e3;
+    }
+</style>
+<script src="<?php echo MODULE_RESOURCE; ?>/js/store_goods_add.step2.js"></script>
+<script type="text/javascript"
+        src="<?php echo RESOURCE_SITE_URL ?>/js/jquery-ui-timepicker-addon/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript"
+        src="<?php echo RESOURCE_SITE_URL ?>/js/jquery-ui-timepicker-addon/jquery-ui-timepicker-zh-CN.js"></script>
+<link href="<?php echo RESOURCE_SITE_URL ?>/js/jquery-ui-timepicker-addon/jquery-ui-timepicker-addon.min.css"
+      rel="stylesheet" type="text/css"/>
+<style type="text/css">
+    input[name='spec'] {
+        margin-left: 10px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $("#sart_time").datetimepicker({
+            timeFormat: "HH:mm:ss",
+            dateFormat: "yy-mm-dd"
+        });
+        $("#end_time").datetimepicker({
+            timeFormat: "HH:mm:ss",
+            dateFormat: "yy-mm-dd"
+        });
+
+        $("input[name='private_price']").change(function () {
+            computeCommisRate();
+        });
+    });
+
+    //计算翻倍比例
+    function computeCommisRate() {
+        var doctor_private_price = $("input[name='private_price']").val(); //获取聊天卡的私有价格
+        var commis_rate = $("#commis_rate").html(); //获取聊天卡设置的翻倍比例
+        var goods_price = (parseFloat(doctor_private_price) * parseFloat(commis_rate)).toFixed(2); //计算翻倍后的价格
+        $("input[name='goods_price']").val(goods_price);
+    }
+</script>
+
+<div class="item-publish">
+    <form method="post" id="goods_form" enctype="multipart/form-data"
+          action="<?php echo getUrl('shop/store_goods_add/saveVrChatCard') ?>">
+        <input type="hidden" name="form_submit" value="ok"/>
+        <input type="hidden" name="opType" value="<?php echo $output['opType'] ?>"/>
+        <input type="hidden" name="goods_id" value="<?php echo $output['goods_info']['goods_id'] ?>"/>
+        <input type="hidden" name="gc_id" class="gc_id" value="0"/>
+        <input type="hidden" name="buy_points_rate" class="buy_points_rate" value="0"/>
+        <input type="hidden" name="commonid" value="<?php echo $output['goods']['goods_commonid']; ?>"/>
+        <input type="hidden" name="type_id" value="<?php echo $output['goods_class']['type_id']; ?>"/>
+        <input type="hidden" name="ref_url" value="<?php echo $_GET['ref_url'] ? $_GET['ref_url'] : getReferer(); ?>"/>
+        <div class="ncsc-form-goods">
+            <h3 id="demo1">聊天卡基本信息</h3>
+            <!--            <dl>-->
+            <!--                <dt><i class="required">*</i>聊天卡号：</dt>-->
+            <!--                <dd id="gcategory">-->
+            <!--                    <select class="gcategory_service_list" name="gcategory_chatcard_list">-->
+            <!--                        <option value="1076">聊天卡号</option>-->
+            <!--                    </select>-->
+            <!--                </dd>-->
+            <!--            </dl>-->
+            <dl>
+                <dt><i class="required">*</i>名称：</dt>
+                <dd>
+                    <input name="g_name" type="text" class="text w400"
+                           value="<?php echo $output['goods_info'] ? $output['goods_info']['goods_name'] : '' ?>"/>
+                    <span></span>
+                    <p class="hint">标题名称长度至少3个字符，最长50个汉字</p>
+                </dd>
+            </dl>
+            <dl>
+                <dt>卖点：</dt>
+                <dd>
+                    <textarea name="g_jingle"
+                              class="textarea h60 w400"><?php echo $output['goods_info'] ? $output['goods_info']['goods_jingle'] : '' ?></textarea>
+                    <span></span>
+                    <p class="hint">商品卖点最长不能超过140个汉字</p>
+                </dd>
+            </dl>
+            <dl>
+                <dt nc_type="no_spec"><i class="required">*</i>私有价格：</dt>
+                <dd nc_type="no_spec">
+                    <input name="private_price"
+                           value="<?php echo $output['goods_info'] ? $output['goods_info']['doctor_private_price'] : 0 ?>"
+                           type="text" class="text w60 private_price"/><em class="add-on"><i class="icon-renminbi"></i></em>
+                    <span></span>
+                </dd>
+            </dl>
+            <dl>
+                <dt nc_type="no_spec"><i class="required">*</i>平台价格：</dt>
+                <dd nc_type="no_spec">
+                    <input name="goods_price" readonly="readonly"
+                           value="<?php echo $output['goods_info'] ? $output['goods_info']['goods_price'] : 0 ?>"
+                           type="text" class="text w60 goods_price"/>
+                    <em class="add-on"><i class="icon-renminbi"></i></em>
+                    <span></span>
+                    <div>（翻倍比例：<span id="commis_rate"><?php echo $output['commis_rate'] ?></span>）</div>
+                </dd>
+            </dl>
+            <dl>
+                <dt nc_type="no_spec"><i class="required">*</i>时长：</dt>
+                <dd nc_type="no_spec">
+                    <input name="goods_spec"
+                           value="<?php echo $output['goods_info'] ? ($output['goods_info']['spec_name'] / 60) : 1 ?>"
+                           type="text" class="text w60 private_price"/> <span>（单位：分钟）</span>
+                </dd>
+            </dl>
+            <dl>
+                <dt nc_type="no_spec"><i class="required">*</i>数量：</dt>
+                <dd nc_type="no_spec">
+                    <input name="goods_storage"
+                           value="<?php echo $output['goods_info'] ? $output['goods_info']['goods_storage'] : 1 ?>"
+                           type="text" class="text w60 goods_storage"/>
+                </dd>
+            </dl>
+            <dl>
+                <dt nc_type="no_spec"><i class="required">*</i>聊天卡开始时间：</dt>
+                <dd nc_type="no_spec">
+                    <input type="text" name="sart_time" id="sart_time" class="text"
+                           value="<?php echo empty($output['goods_info']) ? '' : date('Y-m-d H:i:s', $output['goods_info']['doctor_service_start_time']) ?>">
+                    <em class="add-on"><i class="icon-calendar"></i></em>
+                    <span></span>
+                </dd>
+            </dl>
+            <dl>
+                <dt nc_type="no_spec"><i class="required">*</i>聊天卡结束时间：</dt>
+                <dd nc_type="no_spec">
+                    <input type="text" name="end_time" id="end_time" class="text"
+                           value="<?php echo empty($output['goods_info']) ? '' : date('Y-m-d H:i:s', $output['goods_info']['doctor_service_end_time']) ?>">
+                    <em class="add-on"><i class="icon-calendar"></i></em>
+                    <span></span>
+                </dd>
+            </dl>
+            <dl>
+                <dt>聊天卡主图：</dt>
+                <dd nc_type="no_spec">
+                    <input type="file" name="image_path"/>
+                    <em class="add-on"><i class="icon-calendar"></i></em>
+                    <span>(编辑时如果不上传，则使用原来的图片)</span>
+                </dd>
+            </dl>
+            <h3 id="demo2">详情描述</h3>
+            <dl>
+                <dt>服务描述：</dt>
+                <dd id="ncProductDetails">
+                    <div class="tabs">
+                        <ul class="ui-tabs-nav">
+                            <li class="ui-tabs-selected"><a href="#panel-1"><i class="icon-desktop"></i> 电脑端</a></li>
+                            <li class="selected"><a href="#panel-2"><i class="icon-mobile-phone"></i>手机端</a></li>
+                        </ul>
+                        <div id="panel-1" class="ui-tabs-panel">
+                            <?php showEditor('g_body', $output['goods_info']['goods_body'], '100%', '480px', 'visibility:hidden;', "false", $output['editor_multimedia'], 'all', 'store'); ?>
+                            <div class="hr8">
+                                <div class="ncsc-upload-btn"><a href="javascript:void(0);"><span>
+                                    <input type="file" hidefocus="true" size="1" class="input-file" name="add_album"
+                                           id="add_album" multiple>
+                                </span>
+                                        <p><i class="icon-upload-alt" data_type="0" nctype="add_album_i"></i>图片上传</p>
+                                    </a></div>
+                                <a class="ncbtn mt5" nctype="show_desc"
+                                   href="<?php echo getUrl('shop/store_album/pic_list', array('item' => 'des')) ?>">
+                                    <i class="icon-picture"></i>
+                                    <?php echo $lang['store_goods_album_insert_users_photo']; ?>
+                                </a>
+                                <a href="javascript:void(0);" nctype="del_desc" class="ncbtn mt5"
+                                   style="display: none;">
+                                    <i class=" icon-circle-arrow-up"></i>关闭相册
+                                </a>
+                            </div>
+                            <p id="des_demo"></p>
+                        </div>
+                        <div id="panel-2" class="ui-tabs-panel ui-tabs-hide">
+                            <div class="ncsc-mobile-editor">
+                                <div class="pannel">
+                                    <div class="size-tip">
+                                        <span nctype="img_count_tip">图片总数不得超过<em>20</em>张</span><i>|</i>
+                                        <span nctype="txt_count_tip">文字不得超过<em>5000</em>字</span>
+                                    </div>
+                                    <div class="control-panel" nctype="mobile_pannel">
+                                        <?php if (!empty($output['goods']['mb_body'])) { ?>
+                                            <?php foreach ($output['goods']['mb_body'] as $val) { ?>
+                                                <?php if ($val['type'] == 'text') { ?>
+                                                    <div class="module m-text">
+                                                        <div class="tools"><a nctype="mp_up" href="javascript:void(0);">上移</a><a
+                                                                    nctype="mp_down" href="javascript:void(0);">下移</a><a
+                                                                    nctype="mp_edit" href="javascript:void(0);">编辑</a><a
+                                                                    nctype="mp_del" href="javascript:void(0);">删除</a>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="text-div"><?php echo $val['value']; ?></div>
+                                                        </div>
+                                                        <div class="cover"></div>
+                                                    </div>
+                                                <?php } ?>
+                                                <?php if ($val['type'] == 'image') { ?>
+                                                    <div class="module m-image">
+                                                        <div class="tools">
+                                                            <a nctype="mp_up" href="javascript:void(0);">上移</a>
+                                                            <a nctype="mp_down" href="javascript:void(0);">下移</a>
+                                                            <a nctype="mp_rpl" href="javascript:void(0);">替换</a>
+                                                            <a nctype="mp_del" href="javascript:void(0);">删除</a>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="image-div"><img
+                                                                        src="<?php echo $val['value']; ?>"></div>
+                                                        </div>
+                                                        <div class="cover"></div>
+                                                    </div>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="add-btn">
+                                        <ul class="btn-wrap">
+                                            <li>
+                                                <a href="javascript:void(0);" nctype="mb_add_img">
+                                                    <i class="icon-picture"></i>
+                                                    <p>图片</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" nctype="mb_add_txt">
+                                                    <i class="icon-font"></i>
+                                                    <p>文字</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="explain">
+                                    <dl>
+                                        <dt>1、基本要求：</dt>
+                                        <dd>（1）手机详情总体大小：图片+文字，图片不超过20张，文字不超过5000字；</dd>
+                                        <dd>建议：所有图片都是本宝贝相关的图片。</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>2、图片大小要求：</dt>
+                                        <dd>（1）建议使用宽度480 ~ 620像素、高度小于等于960像素的图片；</dd>
+                                        <dd>（2）格式为：JPG\JEPG\GIF\PNG；</dd>
+                                        <dd>举例：可以上传一张宽度为480，高度为960像素，格式为JPG的图片。</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>3、文字要求：</dt>
+                                        <dd>（1）每次插入文字不能超过500个字，标点、特殊字符按照一个字计算；</dd>
+                                        <dd>（2）请手动输入文字，不要复制粘贴网页上的文字，防止出现乱码；</dd>
+                                        <dd>（3）以下特殊字符“<”、“>”、“"”、“'”、“\”会被替换为空。</dd>
+                                        <dd>建议：不要添加太多的文字，这样看起来更清晰。</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="ncsc-mobile-edit-area" nctype="mobile_editor_area">
+                                <div nctype="mea_img" class="ncsc-mea-img" style="display: none;"></div>
+                                <div class="ncsc-mea-text" nctype="mea_txt" style="display: none;">
+                                    <p id="meat_content_count" class="text-tip"></p>
+                                    <textarea class="textarea valid" nctype="meat_content"></textarea>
+                                    <div class="button">
+                                        <a class="ncbtn ncbtn-bluejeansjeansjeans" nctype="meat_submit"
+                                           href="javascript:void(0);">
+                                            确认
+                                        </a>
+                                        <a class="ncbtn ml10" nctype="meat_cancel" href="javascript:void(0);">
+                                            取消
+                                        </a>
+                                    </div>
+                                    <a class="text-close" nctype="meat_cancel" href="javascript:void(0);">X</a>
+                                </div>
+                            </div>
+                            <input name="m_body" autocomplete="off" type="hidden"
+                                   value='<?php echo $output['goods']['mobile_body']; ?>'>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <div class="bottom tc hr32">
+            <label class="submit-border">
+                <input type="submit" nctype="formSubmit" class="submit" value="提交保存"/>
+            </label>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        getCommisRate();
+        $(".gcategory_service_list").change(function () {
+            getCommisRate();
+        });
+        $(".private_price").change(function () {
+            var privatePrice = parseFloat($(this).val()); //获取私有价格
+            if (privatePrice) {
+                var rate = parseFloat($(".gcategory_service_list").find("option:selected").val()); //获取平台翻倍比例
+                var systemPrice = privatePrice * rate; //计算出平台翻倍后的价格
+                $(".system_price").val(systemPrice.toFixed(2));
+            }
+            else {
+                $(".system_price").val(0.00);
+            }
+        });
+    });
+
+    //获取翻倍比例的倍数
+    function getCommisRate() {
+        var rate = $(".gcategory_service_list").find("option:selected").val(); //服务翻倍比例
+        var gc_id = $(".gcategory_service_list").find("option:selected").attr("data-id"); //服务类别id
+        var point_rate = $(".gcategory_service_list").find("option:selected").attr("data-pointrate"); //服务赠送积分比例
+
+        if (rate) {
+            $(".commis_rate").html(rate);
+        }
+
+        $(".gc_id").val(gc_id);
+
+        $(".buy_points_rate").val(point_rate);
+    }
+</script>
+<script type="text/javascript">
+    var SITEURL = "<?php echo SHOP_SITE_URL; ?>";
+    var DEFAULT_GOODS_IMAGE = "<?php echo thumb(array(), 60);?>";
+    var SHOP_RESOURCE_SITE_URL = "<?php echo MODULE_RESOURCE;?>";
+
+    $(function () {
+
+        // 防止重复提交
+        var __formSubmit = false;
+        $('input[nctype="formSubmit"]').click(function () {
+            if (__formSubmit) {
+                showDialog("不要重复提交数据，请根据上次提示进行调整！");
+                return false;
+            }
+            __formSubmit = true;
+        });
+
+        $.validator.addMethod('checkPrice', function (value, element) {
+            _g_price = parseFloat($('input[name="g_price"]').val());
+            _g_marketprice = parseFloat($('input[name="g_marketprice"]').val());
+            if (_g_marketprice <= 0) {
+                return true;
+            }
+            if (_g_price > _g_marketprice) {
+                return false;
+            } else {
+                return true;
+            }
+        }, '');
+        $('#goods_form').validate({
+            errorPlacement: function (error, element) {
+                $(element).nextAll('span').append(error);
+                __formSubmit = false;
+            },
+            <?php if ($output['edit_goods_sign']) {?>
+            submitHandler: function (form) {
+                ajaxpost('goods_form', '', '', 'onerror');
+            },
+            <?php }?>
+            rules: {
+                g_name: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50
+                },
+                g_jingle: {  //服务卖点
+                    maxlength: 140
+                },
+                private_price:{ //私有价格
+                    required: true,
+                    number: true,
+                    min: 0.01,
+                    max: 9999999
+                },
+                goods_price: { //平台价格
+                    required: true,
+                    number: true,
+                    min: 0.01,
+                    max: 9999999
+                },
+                goods_storage: { //数量
+                    required: true,
+                    digits: true,
+                    min: 0,
+                    max: 999999999
+                },
+                sart_time: { //聊天卡开始时间
+                    required: true
+                },
+                end_time: { //聊天卡结束时间
+                    required: true
+                },
+                goods_spec: {
+                    required: true,
+                    digits: true,
+                    min: 1,
+                    max: 999999999
+                }
+            },
+            messages: {
+                g_name: {
+                    required: '<i class="icon-exclamation-sign"></i>服务名称不能为空',
+                    minlength: '<i class="icon-exclamation-sign"></i>服务标题名称长度至少3个字符，最长50个汉字',
+                    maxlength: '<i class="icon-exclamation-sign"></i>服务标题名称长度至少3个字符，最长50个汉字'
+                },
+                g_jingle: {
+                    maxlength: '<i class="icon-exclamation-sign"></i>商品卖点不能超过140个字符'
+                },
+                private_price:{
+                    required: '<i class="icon-exclamation-sign"></i>请填写私有价格',
+                    number: '<i class="icon-exclamation-sign"></i>请填写正确的价格',
+                    min: '<i class="icon-exclamation-sign"></i>请填写0.01~9999999之间的数字',
+                    max: '<i class="icon-exclamation-sign"></i>请填写0.01~9999999之间的数字'
+                },
+                goods_price: {
+                    required: '<i class="icon-exclamation-sign"></i>请填写平台价格',
+                    number: '<i class="icon-exclamation-sign"></i>请填写正确的价格',
+                    min: '<i class="icon-exclamation-sign"></i>请填写0.01~9999999之间的数字',
+                    max: '<i class="icon-exclamation-sign"></i>请填写0.01~9999999之间的数字'
+                },
+                goods_storage: {
+                    required: '<i class="icon-exclamation-sign"></i>数量不能为空',
+                    digits: '<i class="icon-exclamation-sign"></i>库存必须是数字',
+                    min: '<i class="icon-exclamation-sign"></i><?php echo $lang['store_goods_index_goods_stock_checking'];?>',
+                    max: '<i class="icon-exclamation-sign"></i><?php echo $lang['store_goods_index_goods_stock_checking'];?>'
+                },
+                sart_time: {
+                    required: '<i class="icon-exclamation-sign"></i>聊天卡开始时间不能为空'
+                },
+                end_time: {
+                    required: '<i class="icon-exclamation-sign"></i>聊天卡结束时间不能为空'
+                },
+                goods_spec: {
+                    required: '<i class="icon-exclamation-sign"></i>时长不能为空',
+                    digits: '<i class="icon-exclamation-sign"></i>时长必须是正整数',
+                    min: '<i class="icon-exclamation-sign"></i>时长最小为1分钟'
+                }
+            }
+        });
+
+    });
+    // 按规格存储规格值数据
+    var spec_group_checked = [<?php for ($i = 0; $i < $output['sign_i']; $i++) {
+        if ($i + 1 == $output['sign_i']) {
+            echo "''";
+        } else {
+            echo "'',";
+        }
+    }?>];
+    var str = '';
+    var V = new Array();
+
+    <?php for ($i = 0; $i < $output['sign_i']; $i++){?>
+    var spec_group_checked_<?php echo $i;?> = new Array();
+    <?php }?>
+
+    $(function () {
+        $('dl[nctype="spec_group_dl"]').on('click', 'span[nctype="input_checkbox"] > input[type="checkbox"]', function () {
+            into_array();
+            goods_stock_set();
+        });
+
+        // 提交后不没有填写的价格或库存的库存配置设为默认价格和0
+        // 库存配置隐藏式 里面的input加上disable属性
+        $('input[type="submit"]').click(function () {
+            $('input[data_type="price"]').each(function () {
+                if ($(this).val() == '') {
+                    $(this).val($('input[name="g_price"]').val());
+                }
+            });
+            $('input[data_type="stock"]').each(function () {
+                if ($(this).val() == '') {
+                    $(this).val('0');
+                }
+            });
+            $('input[data_type="alarm"]').each(function () {
+                if ($(this).val() == '') {
+                    $(this).val('0');
+                }
+            });
+            if ($('dl[nc_type="spec_dl"]').css('display') == 'none') {
+                $('dl[nc_type="spec_dl"]').find('input').attr('disabled', 'disabled');
+            }
+        });
+
+    });
+
+    // 将选中的规格放入数组
+    function into_array() {
+        <?php for ($i = 0; $i < $output['sign_i']; $i++){?>
+
+        spec_group_checked_<?php echo $i;?> = new Array();
+        $('dl[nc_type="spec_group_dl_<?php echo $i;?>"]').find('input[type="checkbox"]:checked').each(function () {
+            i = $(this).attr('nc_type');
+            v = $(this).val();
+            c = null;
+            if ($(this).parents('dl:first').attr('spec_img') == 't') {
+                c = 1;
+            }
+            spec_group_checked_<?php echo $i;?>[spec_group_checked_<?php echo $i;?>.length] = [v, i, c];
+        });
+
+        spec_group_checked[<?php echo $i;?>] = spec_group_checked_<?php echo $i;?>;
+
+        <?php }?>
+    }
+
+    // 生成库存配置
+    function goods_stock_set() {
+        //  医生价格 商品库存改为只读
+        $('input[name="g_price"]').attr('readonly', 'readonly').css('background', '#E7E7E7 none');
+        $('input[name="g_storage"]').attr('readonly', 'readonly').css('background', '#E7E7E7 none');
+
+        $('dl[nc_type="spec_dl"]').show();
+        str = '<tr>';
+        <?php recursionSpec(0, $output['sign_i']);?>
+        if (str == '<tr>') {
+            //  医生价格 商品库存取消只读
+            $('input[name="g_price"]').removeAttr('readonly').css('background', '');
+            $('input[name="g_storage"]').removeAttr('readonly').css('background', '');
+            $('dl[nc_type="spec_dl"]').hide();
+        } else {
+            $('tbody[nc_type="spec_table"]').empty().html(str)
+                .find('input[nc_type]').each(function () {
+                s = $(this).attr('nc_type');
+                try {
+                    $(this).val(V[s]);
+                } catch (ex) {
+                    $(this).val('');
+                }
+                ;
+                if ($(this).attr('data_type') == 'marketprice' && $(this).val() == '') {
+                    $(this).val($('input[name="g_marketprice"]').val());
+                }
+                if ($(this).attr('data_type') == 'price' && $(this).val() == '') {
+                    $(this).val($('input[name="g_price"]').val());
+                }
+                if ($(this).attr('data_type') == 'stock' && $(this).val() == '') {
+                    $(this).val('0');
+                }
+                if ($(this).attr('data_type') == 'alarm' && $(this).val() == '') {
+                    $(this).val('0');
+                }
+            }).end()
+                .find('input[data_type="stock"]').change(function () {
+                computeStock();    // 库存计算
+            }).end()
+                .find('input[data_type="price"]').change(function () {
+                computePrice();     // 价格计算
+            }).end()
+                .find('input[nc_type]').change(function () {
+                s = $(this).attr('nc_type');
+                V[s] = $(this).val();
+            });
+        }
+        $('div[nctype="spec_div"]').perfectScrollbar('update');
+    }
+
+    <?php
+    /**
+     *
+     *
+     *  生成需要的js循环。递归调用
+     *
+     *  形式参考 （ 2个规格）
+     *  $('input[type="checkbox"]').click(function(){
+     *      str = '';
+     *      for (var i=0; i<spec_group_checked[0].length; i++ ){
+     *      td_1 = spec_group_checked[0][i];
+     *          for (var j=0; j<spec_group_checked[1].length; j++){
+     *              td_2 = spec_group_checked[1][j];
+     *              str += '<tr><td>'+td_1[0]+'</td><td>'+td_2[0]+'</td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td>';
+     *          }
+     *      }
+     *      $('table[class="spec_table"] > tbody').empty().html(str);
+     *  });
+     */
+    function recursionSpec($len, $sign)
+    {
+        if ($len < $sign) {
+            echo "for (var i_" . $len . "=0; i_" . $len . "<spec_group_checked[" . $len . "].length; i_" . $len . "++){td_" . (intval($len) + 1) . " = spec_group_checked[" . $len . "][i_" . $len . "];\n";
+            $len++;
+            recursionSpec($len, $sign);
+        } else {
+            echo "var tmp_spec_td = new Array();\n";
+            for ($i = 0; $i < $len; $i++) {
+                echo "tmp_spec_td[" . ($i) . "] = td_" . ($i + 1) . "[1];\n";
+            }
+            echo "tmp_spec_td.sort(function(a,b){return a-b});\n";
+            echo "var spec_bunch = 'i_';\n";
+            for ($i = 0; $i < $len; $i++) {
+                echo "spec_bunch += tmp_spec_td[" . ($i) . "];\n";
+            }
+            echo "str += '<input type=\"hidden\" name=\"spec['+spec_bunch+'][goods_id]\" nc_type=\"'+spec_bunch+'|id\" value=\"\" />';";
+            for ($i = 0; $i < $len; $i++) {
+                echo "if (td_" . ($i + 1) . "[2] != null) { str += '<input type=\"hidden\" name=\"spec['+spec_bunch+'][color]\" value=\"'+td_" . ($i + 1) . "[1]+'\" />';}";
+                echo "str +='<td><input type=\"hidden\" name=\"spec['+spec_bunch+'][sp_value]['+td_" . ($i + 1) . "[1]+']\" value=\"'+td_" . ($i + 1) . "[0]+'\" />'+td_" . ($i + 1) . "[0]+'</td>';\n";
+            }
+            echo "str +='<td><input class=\"text price\" type=\"text\" name=\"spec['+spec_bunch+'][marketprice]\" data_type=\"marketprice\" nc_type=\"'+spec_bunch+'|marketprice\" value=\"\" /><em class=\"add-on\"><i class=\"icon-renminbi\"></i></em></td>' +
+                    '<td><input class=\"text price\" type=\"text\" name=\"spec['+spec_bunch+'][price]\" data_type=\"price\" nc_type=\"'+spec_bunch+'|price\" value=\"\" /><em class=\"add-on\"><i class=\"icon-renminbi\"></i></em></td>' +
+                    '<td><input class=\"text stock\" type=\"text\" name=\"spec['+spec_bunch+'][stock]\" data_type=\"stock\" nc_type=\"'+spec_bunch+'|stock\" value=\"\" /></td>' +
+                    '<td><input class=\"text stock\" type=\"text\" name=\"spec['+spec_bunch+'][alarm]\" data_type=\"alarm\" nc_type=\"'+spec_bunch+'|alarm\" value=\"\" /></td>' +
+                    '<td><input class=\"text sku\" type=\"text\" name=\"spec['+spec_bunch+'][sku]\" nc_type=\"'+spec_bunch+'|sku\" value=\"\" /></td>' +
+                    '<td><input class=\"text sku\" type=\"text\" name=\"spec['+spec_bunch+'][barcode]\" nc_type=\"'+spec_bunch+'|barcode\" value=\"\" /></td>' +
+                    '</tr>';\n";
+            for ($i = 0; $i < $len; $i++) {
+                echo "}\n";
+            }
+        }
+    }
+
+    ?>
+
+
+    <?php if (!empty($output['goods']) && $_GET['class_id'] <= 0 && !empty($output['sp_value']) && !empty($output['spec_checked']) && !empty($output['spec_list'])){?>
+    //  编辑商品时处理JS
+    $(function () {
+        var E_SP = new Array();
+        var E_SPV = new Array();
+        <?php
+        $string = '';
+        foreach ($output['spec_checked'] as $v) {
+            $string .= "E_SP[" . $v['id'] . "] = '" . $v['name'] . "';";
+        }
+        echo $string;
+        echo "\n";
+        $string = '';
+        foreach ($output['sp_value'] as $k => $v) {
+            $string .= "E_SPV['{$k}'] = '{$v}';";
+        }
+        echo $string;
+        ?>
+        V = E_SPV;
+        $('dl[nc_type="spec_dl"]').show();
+        $('dl[nctype="spec_group_dl"]').find('input[type="checkbox"]').each(function () {
+            //  医生价格 商品库存改为只读
+            $('input[name="g_price"]').attr('readonly', 'readonly').css('background', '#E7E7E7 none');
+            $('input[name="g_storage"]').attr('readonly', 'readonly').css('background', '#E7E7E7 none');
+            s = $(this).attr('nc_type');
+            if (!(typeof(E_SP[s]) == 'undefined')) {
+                $(this).attr('checked', true);
+                v = $(this).parents('li').find('span[nctype="pv_name"]');
+                if (E_SP[s] != '') {
+                    $(this).val(E_SP[s]);
+                    v.html('<input type="text" maxlength="20" value="' + E_SP[s] + '" />');
+                } else {
+                    v.html('<input type="text" maxlength="20" value="' + v.html() + '" />');
+                }
+                change_img_name($(this));			// 修改相关的颜色名称
+            }
+        });
+
+        into_array();	// 将选中的规格放入数组
+        str = '<tr>';
+        <?php recursionSpec(0, $output['sign_i']);?>
+        if (str == '<tr>') {
+            $('dl[nc_type="spec_dl"]').hide();
+            $('input[name="g_price"]').removeAttr('readonly').css('background', '');
+            $('input[name="g_storage"]').removeAttr('readonly').css('background', '');
+        } else {
+            $('tbody[nc_type="spec_table"]').empty().html(str)
+                .find('input[nc_type]').each(function () {
+                s = $(this).attr('nc_type');
+                try {
+                    $(this).val(E_SPV[s]);
+                } catch (ex) {
+                    $(this).val('');
+                }
+                ;
+            }).end()
+                .find('input[data_type="stock"]').change(function () {
+                computeStock();    // 库存计算
+            }).end()
+                .find('input[data_type="price"]').change(function () {
+                computePrice();     // 价格计算
+            }).end()
+                .find('input[type="text"]').change(function () {
+                s = $(this).attr('nc_type');
+                V[s] = $(this).val();
+            });
+        }
+        $('div[nctype="spec_div"]').perfectScrollbar('update');
+    });
+    <?php }?>
+</script>
+<script src="<?php echo MODULE_RESOURCE; ?>/js/scrolld.js"></script>
+<script type="text/javascript">
+    $("[id*='Btn']").stop(true).on('click', function (e) {
+        e.preventDefault();
+        $(this).scrolld();
+    })
+</script>

@@ -1,0 +1,380 @@
+<?php
+/**
+ * 卖家中心页面
+ */
+?>
+<div class="ncsc-index">
+    <div class="top-container">
+        <div class="basic-info">
+            <dl class="ncsc-seller-info">
+                <dt class="seller-name">
+                <h3><?php echo getSession('seller_name'); ?></h3>
+                <h5>(用户名：<?php echo getSession('member_name'); ?>)
+                    <!--
+		  <?php if($store_info['is_distribution']==0){
+                        if($distribution_info){
+                            ?>
+		 	<b style=" background:#4FC0E8;padding:5px; color:#fff;">已提交申请，请等待审核</b>
+		 <?php }else{
+                            echo '<a href="'.getUrl('shop/seller_center/distribution').'" style=" background:#48CFAE;padding:5px; color:#fff;">申请开通分销</a>';
+                        }
+                    }else{
+                        echo '<b style=" background:#b1191a;padding:5px; color:#fff;">分销医生</b>';
+                    }?>
+         -->
+                </h5>
+                </dt>
+                <dd class="store-logo">
+                    <p><img src="<?php echo getStoreLogo($store_info['store_label'],'store_logo');?>"/></p>
+                </dd>
+                <dd class="seller-permission">管理权限：<strong><?php echo getSession('seller_group_name');?></strong></dd>
+                <dd class="seller-last-login">最后登录：<strong><?php echo getSession('seller_last_login_time');?></strong> </dd>
+                <dd class="store-name">
+                    商家中心名称：
+                    <a href="<?php echo getUrl('shop/show_store/index', array('store_id' => getSession('store_id')), $store_info['store_domain']);?>" >
+                        <?php echo $store_info['store_name'];?>
+                    </a>
+                </dd>
+<!--                <dd class="store-grade">-->
+<!--                    --><?php //echo $lang->_('store_store_grade').$lang->_('nc_colon');?>
+<!--                    <strong>--><?php //echo $store_info['grade_name']; ?>
+<!--                    </strong>-->
+<!--                </dd>-->
+<!--                <dd class="store-validity">-->
+<!--                    --><?php //echo $lang->_('store_validity').$lang->_('nc_colon');?>
+<!--                    <strong>--><?php //echo $store_info['store_end_time_text'];?>
+<!--                        --><?php //if ($store_info['reopen_tip']) {?>
+<!--                            <a href="--><?php //echo getUrl('shop/store_info/reopen')?><!--">马上续签</a>-->
+<!--                        --><?php //} ?>
+<!--                    </strong>-->
+<!--                </dd>-->
+            </dl>
+<!--            --><?php //if (!checkPlatformStore()) { ?>
+<!--                <div class="detail-rate">-->
+<!--                    <h5>--><?php //echo $lang->_('store_dynamic_evaluation').$lang->_('nc_colon');?><!--</h5>-->
+<!--                    <ul>-->
+<!--                        --><?php // foreach ($store_info['store_credit'] as $value) {?>
+<!--                            <li>-->
+<!--                                <h5>--><?php //echo $value['text'];?><!--</h5>-->
+<!--                                <div class="--><?php //echo $value['percent_class'];?><!--" title="--><?php //echo $value['percent_text'];?><!----><?php //echo $value['percent'];?><!--">-->
+<!--                                    --><?php //echo $value['credit'];?><!--<i></i>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                        --><?php //} ?>
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            --><?php //} ?>
+        </div>
+    </div>
+    <div class="seller-cont">
+        <div class="container type-a">
+            <div class="hd">
+                <h3>商品提示</h3>
+            </div>
+            <div class="content">
+                <dl class="focus">
+                    <dt>商品发布情况：</dt>
+                    <dd title="已发布/<?php echo $lang->_('store_publish_goods');?>"><em id="nc_goodscount">0</em>&nbsp;/&nbsp;
+                        <?php if ($store_info['grade_goodslimit'] != 0){ echo $store_info['grade_goodslimit'];} else { echo '不限';} ?>
+                    </dd>
+                    <dt><?php echo $lang->_('store_publish_album').$lang->_('nc_colon');?></dt>
+                    <dd><em id="nc_imagecount">0</em>&nbsp;/&nbsp;<?php echo $store_info['grade_albumlimit'] > 0 ? $store_info['grade_albumlimit'] : '不限'; ?></dd>
+                </dl>
+                <ul>
+                    <li>
+                        <a href="<?php echo getUrl('shop/store_goods_online/index')?>">
+                            <?php echo $lang->_('store_goods_selling');?>
+                            <strong id="nc_online"></strong>
+                        </a>
+                    </li>
+                    <?php if (getConfig('goods_verify')) {?>
+                        <li><a href="<?php echo getUrl('shop/store_goods_offline/index',array('type'=>'wait_verify','verify'=>10))?>" title="<?php echo $lang->_('store_inform30');?>">发布待平台审核 <strong id="nc_waitverify"></strong></a></li>
+                        <li><a href="<?php echo getUrl('shop/store_goods_offline/index',array('type'=>'wait_verify','verify'=>0))?>" title="<?php echo $lang->_('store_inform30');?>">平台审核失败 <strong id="nc_verifyfail"></strong></a></li>
+                    <?php }?>
+                    <li><a href="<?php echo getUrl('shop/store_goods_offline/index')?>"><?php echo $lang->_('store_goods_storage');?> <strong id="nc_offline"></strong></a></li>
+                    <li><a href="<?php echo getUrl('shop/store_goods_offline/index',array('type'=>'lock_up'))?>"><?php echo $lang->_('store_goods_show0');?> <strong id="nc_lockup"></strong></a></li>
+                    <li><a href="<?php echo getUrl('shop/store_consult/consult_list',array('type'=>'to_reply'))?>"><?php echo $lang->_('store_to_consult');?> <strong id="nc_consult"></strong></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container type-b">
+<!--            <div class="hd">-->
+<!--                <h3>系统公告</h3>-->
+<!--                <h5></h5>-->
+<!--            </div>-->
+            <div class="content">
+                <ul>
+                    <?php
+                    if(is_array($article_list) && !empty($article_list)) {
+                        foreach($article_list as $val) {
+                            ?>
+                            <li>
+                                <a target="_blank" <?php if($val['article_url']!=''){?>target="_blank"<?php }?> href="<?php if($val['article_url']!='')echo $val['article_url'];else echo getUrl('member/article/show', array('article_id'=>$val['article_id']));?>" title="<?php echo $val['article_title']; ?>">
+                                    <?php echo $val['article_title'];?>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                    }
+                    ?>
+                </ul>
+                <dl>
+                    <dt><?php echo $lang->_('store_site_info');?></dt>
+                    <?php
+                    if(is_array($phone_array) && !empty($phone_array)) {
+                        foreach($phone_array as $key => $val) {
+                            ?>
+                            <dd><?php echo $lang->_('store_site_phone').($key+1).$lang->_('nc_colon');?><?php echo $val;?></dd>
+                            <?php
+                        }
+                    }
+                    ?>
+                    <dd>
+                        <?php echo $lang->_('store_site_email').$lang->_('nc_colon');?>
+                        <?php echo getConfig('site_email');?>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="container type-a">
+            <div class="hd">
+                <h3><?php echo $lang->_('store_business');?></h3>
+                <h5><?php echo $lang->_('store_business_info');?></h5>
+            </div>
+            <div class="content">
+                <dl class="focus">
+                    <dt><?php echo $lang->_('store_order_info').$lang->_('nc_colon');?></dt>
+                    <dd>
+                        <a href="<?php echo getUrl('shop/store_order')?>">
+                            <?php echo $lang->_('store_order_progressing');?>
+                            <strong id="nc_progressing"></strong>
+                        </a>
+                    </dd>
+                    <dt><?php echo $lang->_('store_complain_info').$lang->_('nc_colon');?></dt>
+                    <dd>
+                        <a href="<?php echo getUrl('shop/store_complain',array('select_complain_state'=>'1'))?>">
+                            <?php echo $lang->_('store_complain');?> <strong id="nc_complain"></strong>
+                        </a>
+                    </dd>
+                </dl>
+                <ul>
+                    <li><a href="<?php echo getUrl('shop/store_order/index',array('state_type'=>'state_new'))?>">待付款<strong id="nc_payment"></strong></a></li>
+                    <li><a href="<?php echo getUrl('shop/store_order/index',array('state_type'=>'state_pay'))?>">待发货<strong id="nc_delivery"></strong></a></li>
+                    <li><a href="<?php echo getUrl('shop/store_refund',array('lock'=>'2'))?>"> <?php echo '售前退款';?> <strong id="nc_refund_lock"></strong></a></li>
+                    <li><a href="<?php echo getUrl('shop/store_refund',array('lock'=>'1'))?>"> <?php echo '售后退款';?> <strong id="nc_refund"></strong></a></li>
+                    <li><a href="<?php echo getUrl('shop/store_return',array('lock'=>'2'))?>"> <?php echo '售前退货';?> <strong id="nc_return_lock"></strong></a></li>
+                    <li><a href="<?php echo getUrl('shop/store_return',array('lock'=>'1'))?>"> <?php echo '售后退货';?> <strong id="nc_return"></strong></a></li>
+                    <li><a href="<?php echo getUrl('shop/store_bill/index',array('bill_state'=>'1'))?>"> <?php echo '待确认账单';?> <strong id="nc_bill_confirm"></strong></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container type-c">
+            <div class="hd">
+                <h3>销售情况统计</h3>
+                <h5>按周期统计商家的订单量和订单金额</h5>
+            </div>
+            <div class="content">
+                <table class="ncsc-default-table">
+                    <thead>
+                    <tr>
+                        <th class="w50">项目</th>
+                        <th>订单量</th>
+                        <th class="w100">订单金额</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="bd-line">
+                        <td>昨日销量</td>
+                        <td><?php echo empty($daily_sales['ordernum']) ? '--' : $daily_sales['ordernum'];?></td>
+                        <td><?php echo empty($daily_sales['orderamount']) ? '--' : $lang->_('currency').$daily_sales['orderamount'];?></td>
+                    </tr>
+                    <tr class="bd-line">
+                        <td>月销量</td>
+                        <td><?php echo empty($monthly_sales['ordernum']) ? '--' : $monthly_sales['ordernum'];?></td>
+                        <td><?php echo empty($monthly_sales['orderamount']) ? '--' : $lang->_('currency').$monthly_sales['orderamount'];?></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container type-c h500">
+            <div class="hd">
+                <h3>单品销售排名</h3>
+                <h5>掌握30日内最热销的商品及时补充货源</h5>
+            </div>
+            <div class="content">
+                <table class="ncsc-default-table">
+                    <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th class="tl" colspan="2">商品信息</th>
+                        <th>销量</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php if ($goods_list) {?>
+                        <?php  $i = 0;foreach ($goods_list as $val) {$i++?>
+                            <tr class="bd-line">
+                                <td class="w50"><strong><?php echo $i;?></strong></td>
+                                <td class="w60">
+                                    <div class="pic-thumb">
+                                        <a href="<?php echo getUrl('shop/goods/index', array('goods_id' => $val['goods_id']))?>" target="_blank">
+                                            <img alt="<?php echo $val['goods_name'];?>" src="<?php echo thumb($val, '60');?>">
+                                        </a>
+                                    </div>
+                                </td>
+                                <td><dl class="goods-name">
+                                        <dt>
+                                            <a href="<?php echo getUrl('shop/goods/index', array('goods_id' => $val['goods_id']))?>" target="_blank">
+                                                <?php echo $val['goods_name'];?>
+                                            </a>
+                                        </dt>
+                                    </dl></td>
+                                <td class="w60"><?php echo $val['goodsnum'];?></td>
+                            </tr>
+                        <?php }?>
+                    <?php }?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+<!--        <div class="container type-d h500">-->
+<!--            <div class="hd">-->
+<!--                <h3>--><?php //echo $lang->_('store_market_info');?><!--</h3>-->
+<!--                <h5>合理参加促销活动可以有效提升商品销量</h5>-->
+<!--            </div>-->
+<!--            <div class="content">-->
+<!--                --><?php //if (getUrl('groupbuy_allow') == 1){ ?>
+<!--                    <dl class="tghd">-->
+<!--                        <dt class="p-name">-->
+<!--                            <a href="--><?php //echo getUrl('shop/store_groupbuy')?><!--">-->
+<!--                                --><?php //echo $lang->_('store_groupbuy');?>
+<!--                            </a>-->
+<!--                        </dt>-->
+<!--                        <dd class="p-ico"></dd>-->
+<!--                        <dd class="p-hint">-->
+<!--                            --><?php //if ($isOwnShop || !empty($groupquota_info)) {?>
+<!--                                <i class="icon-ok-sign"></i>已开通-->
+<!--                            --><?php //} else {?>
+<!--                                <i class="icon-minus-sign"></i>未开通-->
+<!--                            --><?php //}?>
+<!--                        </dd>-->
+<!--                        <dd class="p-info">--><?php //echo $lang->_('store_groupbuy_info');?><!--</dd>-->
+<!--                        --><?php //if (!empty($groupquota_info)) {?>
+<!--                            <dd class="p-point">(续费至：--><?php //echo date('Y-m-d', $groupquota_info['end_time']);?><!--)</dd>-->
+<!--                        --><?php //}?>
+<!--                    </dl>-->
+<!--                --><?php //} ?>
+<!--                --><?php //if (intval(getUrl('promotion_allow')) == 1){ ?>
+<!--                    <dl class="xszk">-->
+<!--                        <dt class="p-name">-->
+<!--                            <a href="--><?php //echo getUrl('shop/store_promotion_xianshi/xianshi_list')?><!--">-->
+<!--                                --><?php //echo $lang->_('store_xianshi');?>
+<!--                            </a>-->
+<!--                        </dt>-->
+<!--                        <dd class="p-ico"></dd>-->
+<!--                        <dd class="p-hint"><span>-->
+<!--            --><?php //if ($isOwnShop || !empty($xianshiquota_info)) {?>
+<!--                <i class="icon-ok-sign"></i>已开通-->
+<!--            --><?php //} else {?>
+<!--                <i class="icon-minus-sign"></i>未开通-->
+<!--            --><?php //}?>
+<!--            </span></dd>-->
+<!--                        <dd class="p-info">--><?php //echo $lang->_('store_xianshi_info');?><!--</dd>-->
+<!--                        --><?php //if (!empty($xianshiquota_info)) {?>
+<!--                            <dd class="p-point">(续费至：--><?php //echo date('Y-m-d', $xianshiquota_info['end_time']);?><!--)</dd>-->
+<!--                        --><?php //}?>
+<!--                    </dl>-->
+<!--                    <dl class="mjs">-->
+<!--                        <dt class="p-name">-->
+<!--                            <a href="--><?php //echo getUrl('shop/store_promotion_mansong/mansong_list')?><!--">-->
+<!--                                --><?php //echo $lang->_('store_mansong');?>
+<!--                            </a>-->
+<!--                        </dt>-->
+<!--                        <dd class="p-ico"></dd>-->
+<!--                        <dd class="p-hint"><span>-->
+<!--            --><?php //if ($isOwnShop || !empty($mansongquota_info)) {?>
+<!--                <i class="icon-ok-sign"></i>已开通-->
+<!--            --><?php //} else {?>
+<!--                <i class="icon-minus-sign"></i>未开通-->
+<!--            --><?php //}?>
+<!--            </span></dd>-->
+<!--                        <dd class="p-info">--><?php //echo $lang->_('store_mansong_info');?><!--</dd>-->
+<!--                        --><?php //if (!empty($mansongquota_info)) {?>
+<!--                            <dd class="p-point">(续费至：--><?php //echo date('Y-m-d', $mansongquota_info['end_time']);?><!--)</dd>-->
+<!--                        --><?php //}?>
+<!--                    </dl>-->
+<!--                    <dl class="zhxs">-->
+<!--                        <dt class="p-name">-->
+<!--                            <a href="--><?php //echo getUrl('shop/store_promotion_bundling/bundling_list')?><!--">-->
+<!--                                --><?php //echo $lang->_('store_bundling');?>
+<!--                            </a>-->
+<!--                        </dt>-->
+<!--                        <dd class="p-ico"></dd>-->
+<!--                        <dd class="p-hint"><span>-->
+<!--            --><?php //if ($isOwnShop || !empty($binglingquota_info)) {?>
+<!--                <i class="icon-ok-sign"></i>已开通-->
+<!--            --><?php //} else {?>
+<!--                <i class="icon-minus-sign"></i>未开通-->
+<!--            --><?php //}?>
+<!--            </span></dd>-->
+<!--                        <dd class="p-info">--><?php //echo $lang->_('store_bundling_info');?><!--</dd>-->
+<!--                        --><?php //if (!empty($binglingquota_info)) {?>
+<!--                            <dd class="p-point">(续费至：--><?php //echo date('Y-m-d', $binglingquota_info['bl_quota_endtime']);?><!--)</dd>-->
+<!--                        --><?php //}?>
+<!--                    </dl>-->
+<!--                    <dl class="tjzw">-->
+<!--                        <dt class="p-name"><a href="--><?php //echo getUrl('shop/store_promotion_booth/booth_list')?><!--">推荐展位</a></dt>-->
+<!--                        <dd class="p-ico"></dd>-->
+<!--                        <dd class="p-hint"><span>-->
+<!--            --><?php //if ($isOwnShop || !empty($boothquota_info)) {?>
+<!--                <i class="icon-ok-sign"></i>已开通-->
+<!--            --><?php //} else {?>
+<!--                <i class="icon-minus-sign"></i>未开通-->
+<!--            --><?php //}?>
+<!--            </span></dd>-->
+<!--                        <dd class="p-info">--><?php //echo $lang->_('store_activity_info');?><!--</dd>-->
+<!--                        --><?php //if (!empty($boothquota_info)) {?>
+<!--                            <dd class="p-point">(续费至：--><?php //echo date('Y-m-d', $boothquota_info['booth_quota_endtime']);?><!--)</dd>-->
+<!--                        --><?php //}?>
+<!--                    </dl>-->
+<!--                --><?php //} ?>
+<!--                --><?php //if (getConfig('voucher_allow') == 1){?>
+<!--                    <dl class="djq">-->
+<!--                        <dt class="p-name"><a href="--><?php //echo getUrl('shop/store_voucher')?><!--">--><?php //echo $lang->_('store_voucher');?><!--</a></span></dt>-->
+<!--                        <dd class="p-ico"></dd>-->
+<!--                        <dd class="p-hint"><span>-->
+<!--            --><?php //if ($isOwnShop || !empty($voucherquota_info)) {?>
+<!--                <i class="icon-ok-sign"></i>已开通-->
+<!--            --><?php //} else {?>
+<!--                <i class="icon-minus-sign"></i>未开通-->
+<!--            --><?php //}?>
+<!--            </span></dd>-->
+<!--                        <dd class="p-info">--><?php //echo $lang->_('store_voucher_info');?><!--</dd>-->
+<!--                        --><?php //if (!empty($voucherquota_info)) {?>
+<!--                            <dd class="p-point">(续费至：--><?php //echo date('Y-m-d', $voucherquota_info['quota_endtime']);?><!--)</dd>-->
+<!--                        --><?php //}?>
+<!--                    </dl>-->
+<!--                --><?php //}?>
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<script>
+    $(function(){
+        var timestamp=Math.round(new Date().getTime()/1000/60);
+        $.getJSON('<?php echo getUrl('shop/seller_center/statistics')?>?rand='+timestamp, null, function(data){
+            if (data == null) return false;
+            for(var a in data) {
+                if(data[a] != 'undefined' && data[a] != 0) {
+                    var tmp = '';
+                    if (a != 'goodscount' && a != 'imagecount') {
+                        $('#nc_'+a).parents('a').addClass('num');
+                    }
+                    $('#nc_'+a).html(data[a]);
+                }
+            }
+        });
+    });
+</script>

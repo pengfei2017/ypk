@@ -1,0 +1,54 @@
+
+<div class="ncm-flow-layout">
+    <div class="ncm-flow-container">
+        <div class="title">
+            <h3>投诉</h3>
+        </div>
+        <div id="saleRefund" show_id="1">
+            <div class=" ncm-default-form">
+                <div id="warning"></div>
+                <form id="post_form1" enctype="multipart/form-data" method="post" action="<?php echo getUrl('shop/member_vr_refund/add_tousu',array('order_id'=>$output['order']['order_id']))?>">
+                    <input type="hidden" name="form_submit" value="ok" />
+                    <input type="radio" style="-webkit-appearance: radio;" value="对医生的服务不满意" name="tousu" checked="checked"/>对医生的服务不满意<br/><br/>
+                    <input type="radio" style="-webkit-appearance: radio;" value="医生没有及时回答问题" name="tousu"/>医生没有及时回答问题<br/><br/>
+                    <input type="radio" style="-webkit-appearance: radio;" value="医生忘记或忙于其他事情，没有执行咨询" name="tousu" />医生忘记或忙于其他事情，没有执行咨询<br/><br/>
+
+                    <div class="bottom">
+                        <label class="submit-border">
+                            <input type="submit" class="submit" value="确认提交" />
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <?php require('member_vr_refund_right.phtml');?>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('#post_form1').validate({
+            errorPlacement: function(error, element){
+                error.appendTo(element.parentsUntil('dl').find('span.error'));
+            },
+            submitHandler:function(form){
+                ajaxpost('post_form1', '', '', 'onerror')
+            },
+            rules : {
+                'rec_id[]' : {
+                    required   : true
+                },
+                'buyer_message' : {
+                    required   : true
+                }
+            },
+            messages : {
+                'rec_id[]'  : {
+                    required  : '<i class="icon-exclamation-sign"></i>请选择兑换码'
+                },
+                'buyer_message'  : {
+                    required   : '<i class="icon-exclamation-sign"></i>请填写退款说明'
+                }
+            }
+        });
+    });
+</script>

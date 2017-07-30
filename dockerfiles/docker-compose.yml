@@ -1,0 +1,56 @@
+version: '3.1'
+
+services:
+
+    ypk-database:
+        build:
+            context: ../database
+            dockerfile: ../database/Dockerfile
+        image: hepengfei2017/ypk-database:latest
+        volumes:
+            - YpkData:/var/lib/mysql
+        # set default mysql root password, change as needed
+        environment:
+            MYSQL_ROOT_PASSWORD: hpf
+        # Expose port 3306 to host. Not for the application
+        ports:
+            - "3306:3306"
+        networks:
+            - ypk-net
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
+
+    ypk-server:
+        build:
+            context: ./
+            dockerfile: ./dockerfiles/Dockerfile.ypk
+        image: hepengfei2017/ypk-web:latest
+        volumes:
+            - YpkFiles:/var/www/html/public/files
+        depends_on:
+            - ypk-database
+        # open ports for apache and remote debugging
+        ports:
+            - "80:80"
+            #- "9000:9000"
+        networks:
+            - ypk-net
+        deploy:
+            replicas: 1
+            update_config:
+                parallelism: 1
+            restart_policy:
+                condition: on-failure
+
+volumes:
+    YpkData:
+    YpkFiles:
+
+networks:
+    ypk-net:
+        driver: overlay
+
+
+# docker-compose -f ./dockerfiles/docker-compose.yml up -d

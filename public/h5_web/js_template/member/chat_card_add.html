@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1"/>
+    <title>发布咨询卡</title>
+    <link rel="stylesheet" type="text/css" href="../../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../../css/nctouch_member.css">
+    <style type="text/css">
+        .news_list{
+            height: 80px;
+            line-height: 80px;
+        }
+        .news_list .news_img{
+            width: 60px;
+            height:60px;
+        }
+        .news_list h3{
+            width: 79%;
+        }
+        i{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<header id="header">
+    <div class="header-wrap">
+        <div class="header-l"> <a href="javascript:history.back();"> <i class="back"></i> </a> </div>
+        <div class="header-title">
+            <h1>发布咨询卡</h1>
+        </div>
+    </div>
+    <div class="header-r"> <a id="header-nav" href="javascript:void(0);"><i class="more"></i><sup></sup></a> </div>
+    <div class="nctouch-nav-layout">
+        <div class="nctouch-nav-menu"> <span class="arrow"></span>
+            <ul>
+                <li><a href="../../index.html"><i class="home"></i>首页</a></li>
+                <li><a href="../search.html"><i class="search"></i>搜索</a></li>
+                <li><a href="../product_first_categroy.html"><i class="categroy"></i>分类</a></li>
+                <li><a href="javascript:void(0);"><i class="message"></i>消息<sup></sup></a></li>
+                <li><a href="../cart_list.html"><i class="cart"></i>购物车<sup></sup></a></li>
+                <li><a href="../member/member.html"><i class="member"></i>我的</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div class="nctouch-main-layout fixed-Width">
+    <div class="nctouch-inp-con">
+        <form id="submitForm" action="/mobile/member_index/chat_card_save" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="key" value=""/>
+            <input type="hidden" name="opType" value="add" />
+            <input type="hidden" name="goods_id" value="" />
+            <input type="hidden" name="gc_id" class="gc_id" value="1076" />
+            <input type="hidden" name="buy_points_rate" class="buy_points_rate" value="0" />
+            <ul class="form-box">
+                <!--<li class="form-item">-->
+                    <!--<h4 style="text-align: left;"><i>*</i>聊天卡号</h4>-->
+                    <!--<div class="input-box">-->
+                        <!--<select class="gcategory_service_list" name="gcategory_service_list" style="margin-top: 8px;height: 28px;width: 150px;">-->
+
+                        <!--</select>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>聊天卡名字</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp" name="g_name" id="g_name">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;">聊天卡卖点</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp" name="g_jingle" id="g_jingle">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>私有价格</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp" name="private_price" id="private_price">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;">翻倍比例</h4>
+                    <div class="input-box" style="line-height: 1.95rem;">
+                        <span class="commis_rate">0</span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>平台价格</h4>
+                    <div class="input-box">
+                        <input type="text" readonly="readonly" class="inp" name="goods_price" id="goods_price">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;width: 5rem;"><i>*</i>时长(单位：分钟)</h4>
+                    <div class="input-box" style="margin-left: 5.5rem;">
+                        <input type="text" class="inp" name="goods_spec" id="goods_spec">
+                        <span class="input-del" style="font-size: 0.7rem;">(单位：分钟)</span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>开始时间</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp appDateTime" name="sart_time" id="sart_time">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>结束时间</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp appDateTime" name="end_time" id="end_time">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>数量</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp" name="goods_storage" id="goods_storage">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;">聊天卡主图</h4>
+                    <div class="input-box">
+                        <input type="file" class="inp" name="image_path" id="image_path">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+            </ul>
+            <div style="text-align: center;margin-top: 30px;">
+                <input type="button" onclick="formSubmit()" value="提交保存" style="width: 75px;height: 30px;border-radius: 7px;margin-top: 10px;margin-bottom: 10px;"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="../../js/config.js"></script>
+<script type="text/javascript" src="../../js/zepto.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/simple-plugin.js"></script>
+<script type="text/javascript" src="../../js/js_template/footer.js"></script>
+<script type="text/javascript" src="/resource/js/jquery.js"></script>
+<script type="text/javascript" src="/resource/js/jquery.validation.min.js"></script>
+<script type="text/javascript" src="../../js/js_template/chat_card.js"></script>
+
+
+<script src="/resource/js/mobiscroll/dev/js/mobiscroll.core-2.5.2.js" type="text/javascript"></script>
+<script src="/resource/js/mobiscroll/dev/js/mobiscroll.core-2.5.2-zh.js" type="text/javascript"></script>
+<link href="/resource/js/mobiscroll/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" type="text/css" />
+<link href="/resource/js/mobiscroll/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" type="text/css" />
+<script src="/resource/js/mobiscroll/dev/js/mobiscroll.datetime-2.5.1.js" type="text/javascript"></script>
+<script src="/resource/js/mobiscroll/dev/js/mobiscroll.datetime-2.5.1-zh.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        var currYear = (new Date()).getFullYear();
+        var opt={};
+        opt.date = {preset : 'date'};
+        //opt.datetime = { preset : 'datetime', minDate: new Date(2012,3,10,9,22), maxDate: new Date(2014,7,30,15,44), stepMinute: 5  };
+        opt.datetime = {preset : 'datetime'};
+        opt.time = {preset : 'time'};
+        opt.default = {
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式
+            mode: 'scroller', //日期选择模式
+            lang:'zh',
+            startYear:currYear, //开始年份
+            endYear:currYear + 10 //结束年份
+        };
+
+        $("#appDate").val('').scroller('destroy').scroller($.extend(opt['date'], opt['default']));
+        var optDateTime = $.extend(opt['datetime'], opt['default']);
+        $(".appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
+    });
+</script>
+
+</body>
+</html>

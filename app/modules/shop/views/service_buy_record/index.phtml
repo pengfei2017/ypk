@@ -1,0 +1,102 @@
+<style type="text/css">
+    table {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    table tr, table th, table td {
+        border: solid 1px #000;
+        line-height: 35px;
+        height: 35px;
+        text-align: center;
+    }
+</style>
+
+<script type="text/javascript">
+    var __sto = setTimeout;
+    window.setTimeout = function(callback,timeout,param)
+    {
+        var args = Array.prototype.slice.call(arguments,2);
+        var _cb = function()
+        {
+            callback.apply(null,args);
+        };
+        __sto(_cb,timeout);
+    };
+    var audio_playing = false; //是否正在播放声音
+    $(function () {
+        loadDataList(-1);
+        $('#serviceList').change(function () {
+            var serviceId = $(this).find("option:checked").val(); //获取服务id（亦即商品id）
+            loadDataList(serviceId);
+        });
+
+        //设置一个定时器
+        setTimeout(msg_tips,3000);
+    });
+
+    //异步加载列表数据
+    function loadDataList(serviceId) {
+        $.post("<?php echo getUrl('shop/service_buy_record/ajax_list')?>", {"serviceId": serviceId}, function (data) {
+            $(".tbList").find("tr:gt(0)").remove();
+            $(".tbList").append(data);
+        }, null);
+    }
+    
+    function msg_tips() {
+        $.post("<?php echo getUrl('shop/service_buy_record/check_buy')?>",null,function (data) {
+            if(data!="" && data!=null && data!="null" && data!='undefined'){
+                var currentAudio = document.getElementById("msg_tip_audio");
+                if (audio_playing) {
+                    audio_playing = false;
+                    currentAudio.pause();
+                }
+                audio_playing = true;
+                try {
+                    lastRunTime = Date.now();
+                    currentAudio.play(); //开始播放，可能需要三四秒才能播放完，所以下面不能立马把audio_playing设置为false
+                } catch (e) {
+                }
+
+                var arr=eval("("+data+")");
+                var str="";
+                for(var key_index in arr){
+                    str+="<p style=''>"+arr[key_index].buyer_name+"&nbsp;&nbsp;兑换码:"+arr[key_index].vr_code+"</p>";
+                    $("tr[id='"+arr[key_index].id+"']").find(".is_exchange").html("<span style='color: green;font-weight: bold;'>是</span>");
+                    $("tr[id='"+arr[key_index].id+"']").find(".vr_code").html("<span style='color: green;font-weight: bold;'>"+arr[key_index].vr_code+"</span>");
+                }
+                showDialog(str, 'succ', null, null, 1, null, null, null, null, 5, null);
+
+
+//                    var idArr=data.split(",");
+//                    for (var i=0;i<idArr.length;i++){
+//                        $("tr[id='"+idArr[i]+"']").find(".is_exchange").html("<span style='color: green;font-weight: bold;'>是</span>");
+//                    }
+            }
+            setTimeout(msg_tips,6000);
+        },null);
+    }
+</script>
+
+<select id="serviceList">
+    <option value="-1">--请选择服务名称--</option>
+    <?php echo $output['option_list'] ?>
+</select>
+<table class="tbList">
+    <tr style="background-color: #434A54;color: #fff;">
+        <th>服务名称</th>
+        <th>购买者</th>
+        <th>购买时间</th>
+        <th>编号</th>
+        <th>服务开始时间</th>
+        <th>服务结束时间</th>
+        <th>是否已兑换</th>
+        <th>兑换码</th>
+        <th>买家留言</th>
+    </tr>
+</table>
+<audio id="msg_tip_audio" style="display: none;">
+    <source src="<?php echo RESOURCE_SITE_URL?>/audio/ordermsg.mp3" type="audio/mpeg"/>
+    <source src="<?php echo RESOURCE_SITE_URL?>/audio/ordermsg.ogg" type="audio/ogg"/>
+    <source src="<?php echo RESOURCE_SITE_URL?>/audio/ordermsg.wav" type="audio/wav"/>
+</audio>

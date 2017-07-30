@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1"/>
+    <title>我的服务</title>
+    <link rel="stylesheet" type="text/css" href="../../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../../css/nctouch_member.css">
+    <style type="text/css">
+        .news_list{
+            height: 80px;
+            line-height: 80px;
+        }
+        .news_list .news_img{
+            width: 60px;
+            height:60px;
+        }
+        .news_list h3{
+            width: 79%;
+        }
+        i{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <div class="header-wrap">
+        <div class="header-l"> <a href="member.html"> <i class="back"></i> </a> </div>
+        <div class="header-title">
+            <h1>支付帐号</h1>
+        </div>
+    </div>
+    <div class="header-r"> <a id="header-nav" href="javascript:void(0);"><i class="more"></i><sup></sup></a> </div>
+    <div class="nctouch-nav-layout">
+        <div class="nctouch-nav-menu"> <span class="arrow"></span>
+            <ul>
+                <li><a href="../../index.html"><i class="home"></i>首页</a></li>
+                <li><a href="../search.html"><i class="search"></i>搜索</a></li>
+                <li><a href="../product_first_categroy.html"><i class="categroy"></i>分类</a></li>
+                <li><a href="javascript:void(0);"><i class="message"></i>消息<sup></sup></a></li>
+                <li><a href="../cart_list.html"><i class="cart"></i>购物车<sup></sup></a></li>
+                <li><a href="../member/member.html"><i class="member"></i>我的</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div class="nctouch-main-layout fixed-Width">
+    <div class="nctouch-inp-con">
+        <form id="submitForm" action="/mobile/member_index/account_pay" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="type" value="save" />
+            <input type="hidden" name="key" value="" />
+            <ul class="form-box">
+                <li class="form-item">
+                    <h4 style="text-align: left;">支付宝帐号</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp g_name" name="account_pay" id="account_pay">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;">微信帐号</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp g_name" name="account_wx" id="account_wx">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;">银行卡帐号</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp g_name" name="account_bank" id="account_bank">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item" style="line-height: 1.95rem;">
+                    <h4 style="text-align: left;">开户行</h4>
+                    <div class="input-box">
+                        <select name="bank_type" id="bank_type">
+                            <option value="中国银行">中国银行</option>
+                            <option value="中国工商银行">中国工商银行</option>
+                            <option value="中国建设银行">中国建设银行</option>
+                            <option value="中国农业银行">中国农业银行</option>
+                            <option value="中国邮政储蓄">中国邮政储蓄</option>
+                            <option value="农村信用社">农村信用社</option>
+                            <option value="浦发银行">浦发银行</option>
+                            <option value="光大银行">光大银行</option>
+                            <option value="中信银行">中信银行</option>
+                            <option value="民生银行">民生银行</option>
+                            <option value="招商银行">招商银行</option>
+                        </select>
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item" style="line-height: 1.95rem;">
+                    <h4 style="text-align: left;">银行卡类型</h4>
+                    <div class="input-box">
+                        <select name="bank_class" id="bank_class">
+                            <option value="储蓄卡">储蓄卡</option>
+                            <option value="信用卡">信用卡</option>
+                        </select>
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;">开户人姓名</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp g_name" name="bank_name" id="bank_name">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;">开户行地址</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp g_name" name="bank_address" id="bank_address">
+                        <span class="input-del"></span>
+                    </div>
+                </li>
+				<li style="text-align: center;">
+                    <span style="font-size: 0.5rem;color: red;">* 填写的支付帐号必须真实有效，否则将无法进行打款!</span>
+                </li>
+                <li style="text-align: center;">
+                    <input type="submit" value="提交保存" style="width: 75px;height: 30px;border-radius: 7px;margin-top: 10px;margin-bottom: 10px;"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="../../js/config.js"></script>
+<script type="text/javascript" src="../../js/zepto.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/simple-plugin.js"></script>
+<script type="text/javascript" src="../../js/js_template/footer.js"></script>
+<script type="text/javascript" src="../../js/js_template/account_pay.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1"/>
+    <title>Title</title>
+</head>
+<body>
+<audio controls="controls" id="music" style="display: none;" src="/chat_resource/msg.mp3">
+    <source  type="audio/mpeg"/>
+</audio>
+<button onclick="kk()">播放</button>
+<script type="text/javascript">
+    function kk() {
+        Media = document.getElementById("music");
+        Media.src = "/chat_resource/msg.mp3";
+        Media.play();
+    }
+</script>
+</body>
+</html>

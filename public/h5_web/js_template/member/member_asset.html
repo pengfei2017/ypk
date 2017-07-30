@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1"/>
+    <title>我的收入</title>
+    <link rel="stylesheet" type="text/css" href="../../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../../css/nctouch_member.css">
+</head>
+<body>
+<header id="header">
+    <div class="header-wrap">
+        <div class="header-l"><a href="javascript:history.back();"> <i class="back"></i> </a></div>
+        <div class="header-title">
+            <h1>我的收入</h1>
+        </div>
+    </div>
+    <div class="header-r"><a id="header-nav" href="javascript:void(0);"><i class="more"></i><sup></sup></a></div>
+    <div class="nctouch-nav-layout">
+        <div class="nctouch-nav-menu"><span class="arrow"></span>
+            <ul>
+                <li><a href="../../index.html"><i class="home"></i>首页</a></li>
+                <li><a href="../search.html"><i class="search"></i>搜索</a></li>
+                <li><a href="../product_first_categroy.html"><i class="categroy"></i>分类</a></li>
+                <li><a href="javascript:void(0);"><i class="message"></i>消息<sup></sup></a></li>
+                <li><a href="../cart_list.html"><i class="cart"></i>购物车<sup></sup></a></li>
+                <li><a href="../member/member.html"><i class="member"></i>我的</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="nctouch-main-layout">
+    <ul class="nctouch-default-list">
+        <li>
+            <a href="predepositlog_list.html">
+                <h4><i class="cc-06"></i>账户余额</h4>
+                <h6>预存款账户余额、充值及提现明细</h6>
+                <span class="tip" id="predepoit"></span> <span class="arrow-r"></span>
+            </a>
+        </li>  <!--账户余额-->
+        <!--<li>-->
+            <!--<a href="rechargecardlog_list.html">-->
+                <!--<h4><i class="cc-07"></i>充值卡余额</h4>-->
+                <!--<h6>充值卡账户余额以及卡密充值操作</h6>-->
+                <!--<span class="tip" id="rcb"></span> <span class="arrow-r"></span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li><a href="voucher_list.html">-->
+        <!--<h4><i class="cc-08"></i>医生代金券</h4>-->
+        <!--<h6>医生代金券使用情况以及卡密兑换代金券操作</h6>-->
+        <!--<span class="tip" id="voucher"></span><span class="arrow-r"></span></a></li>-->
+        <!--<li><a href="redpacket_list.html">-->
+        <!--<h4><i class="cc-09"></i>平台红包</h4>-->
+        <!--<h6>平台红包使用情况以及卡密领取红包操作</h6>-->
+        <!--<span class="tip" id="redpacket"></span><span class="arrow-r"></span></a></li>-->
+        <li>
+            <a href="pointslog_list.html">
+                <h4><i class="cc-10"></i>会员积分</h4>
+                <h6>会员积分获取及消费日志</h6>
+                <span class="tip" id="point"></span><span class="arrow-r"></span>
+            </a>
+        </li> <!--会员积分-->
+        <li>
+            <a href="reward_straght.html?type=straght">
+                <h4><i class="cc-06"></i>直荐奖</h4>
+                <h6>客户圈直荐奖</h6>
+                <span class="tip" id="straight"></span>
+            </a>
+        </li>  <!--直荐奖-->
+        <li class="straight_doctor">
+            <a href="reward_straght.html?member_type=doctor&type=straght">
+                <h4><i class="cc-06"></i>直荐奖</h4>
+                <h6>医护圈直荐奖</h6>
+                <span class="tip" id="straight_doctor"></span>
+            </a>
+        </li>  <!--直荐奖-->
+        <li>
+            <a href="reward_collision.html?type=collision">
+                <h4><i class="cc-06"></i>积分奖</h4>
+                <h6>客户圈积分奖</h6>
+                <span class="tip" id="collision"></span>
+            </a>
+        </li> <!--积分碰撞奖-->
+        <li class="collision_doctor">
+            <a href="reward_collision.html?member_type=doctor&type=collision">
+                <h4><i class="cc-06"></i>积分奖</h4>
+                <h6>医护圈积分奖</h6>
+                <span class="tip" id="collision_doctor"></span>
+            </a>
+        </li> <!--积分碰撞奖-->
+        <li>
+            <a href="reward_commission.html?type=commission">
+                <h4><i class="cc-06"></i>管理奖</h4>
+                <h6>客户圈管理奖</h6>
+                <span class="tip" id="commission"></span>
+            </a>
+        </li>  <!--分佣奖-->
+        <li class="commission_doctor">
+            <a href="reward_commission.html?member_type=doctor&type=commission">
+                <h4><i class="cc-06"></i>管理奖</h4>
+                <h6>医护圈管理奖</h6>
+                <span class="tip" id="commission_doctor"></span>
+            </a>
+        </li>  <!--分佣奖-->
+        <li class="share_benefits">
+            <a href="reward_share_benefits.html?type=share_benefits">
+                <h4><i class="cc-06"></i>分利奖</h4>
+                <h6>*此奖项只有医务人员拥有</h6>
+                <span class="tip" id="share_benefits"></span>
+            </a>
+        </li> <!--分利奖-->
+        <li class="month_reward">
+            <a href="month_reward.html">
+                <h4><i class="cc-06"></i>本月奖金</h4>
+            </a>
+        </li> <!--本月奖金-->
+    </ul>
+</div>
+<footer id="footer" class="posa"></footer>
+<script type="text/javascript" src="../../js/config.js"></script>
+<script type="text/javascript" src="../../js/zepto.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/js_template/footer.js"></script>
+<script type="text/javascript" src="../../js/js_template/member_asset.js"></script>
+</body>
+</html>

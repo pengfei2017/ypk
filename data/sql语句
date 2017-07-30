@@ -1,0 +1,139 @@
+数据库备份：mysqldump -h192.168.1.106 -uroot -phpf ypk > E:\www\ypk\data\ypk.sql
+
+数据库还原：E:
+            cd \www\ypk\data\
+            mysql -h192.168.1.106 -uroot -phpf
+            drop database ypk;
+            create database ypk;
+            use ypk;
+            source ypk.sql;
+
+网上邻居共享文件
+映射默认共享 net use z: \\192.168.1.102\Users "5566" /user:"administrator"
+删除映射的z盘，其他盘类推 net use z: /del
+删除全部映射的盘,会有提示要求按y确认 net use * /del
+
+redis客户端登录命令 redis-cli
+redis客户端验证登录密码 auth hpf
+删除当前数据库中的所有Key flushdb
+删除所有数据库中的key flushall
+
+生成模型类 phalcon model --name=points_collision_log --namespace=Ypk\Models  --get-set --output=app/common/models
+生成模型类 phalcon model --name=member --namespace=Ypk\Models  --get-set --output=app/common/models
+
+清空测试数据：
+update member set member_paypwd=md5(123456);
+update member set available_predeposit=100000;
+DELETE FROM admin
+WHERE admin.admin_id > 1;
+DELETE FROM album_class
+WHERE album_class.aclass_id > 1;
+DELETE FROM member
+WHERE member.member_id > 1;
+DELETE FROM member_common
+WHERE member_common.member_id > 1;
+DELETE FROM seller
+WHERE seller.seller_id > 1;
+DELETE FROM spec
+WHERE spec.sp_id > 1;
+DELETE FROM store
+WHERE store.store_id > 1;
+DELETE FROM store_extend
+WHERE store_extend.store_id > 1;
+TRUNCATE TABLE store_joinin;
+TRUNCATE TABLE store_msg;
+TRUNCATE TABLE store_msg_read;
+TRUNCATE TABLE store_sns_comment;
+TRUNCATE TABLE store_sns_tracelog;
+TRUNCATE TABLE store_waybill;
+TRUNCATE TABLE type;
+TRUNCATE TABLE type_brand;
+TRUNCATE TABLE type_spec;
+TRUNCATE TABLE vr_order;
+TRUNCATE TABLE vr_order_bill;
+TRUNCATE TABLE vr_order_code;
+TRUNCATE TABLE vr_order_snapshot;
+TRUNCATE TABLE vr_order_statis;
+TRUNCATE TABLE vr_refund;
+TRUNCATE TABLE vr_refund_detail;
+TRUNCATE TABLE type_custom;
+TRUNCATE TABLE store_goods_class;
+TRUNCATE TABLE store_bind_class;
+TRUNCATE TABLE store_class;
+TRUNCATE TABLE spec_value;
+TRUNCATE TABLE album_pic;
+TRUNCATE TABLE attribute;
+TRUNCATE TABLE member_buy_service_num;
+TRUNCATE TABLE member_chat_card;
+TRUNCATE TABLE attribute_value;
+TRUNCATE TABLE cart;
+TRUNCATE TABLE consume;
+TRUNCATE TABLE cron;
+TRUNCATE TABLE evaluate_goods;
+TRUNCATE TABLE evaluate_store;
+TRUNCATE TABLE exppoints_log;
+
+TRUNCATE TABLE member_commission_log;
+TRUNCATE TABLE member_reward_giveout_log;
+TRUNCATE TABLE member_share_benefits_log;
+TRUNCATE TABLE member_points_collision_log;
+TRUNCATE TABLE member_straight_log;
+TRUNCATE TABLE points_log;
+TRUNCATE TABLE member_month_tree_level;
+TRUNCATE TABLE member_update_tree_level_log;
+TRUNCATE TABLE message;
+TRUNCATE TABLE favorites;
+TRUNCATE TABLE gadmin;
+TRUNCATE TABLE goods;
+TRUNCATE TABLE goods_common;
+TRUNCATE TABLE goods_images;
+TRUNCATE TABLE groupbuy;
+TRUNCATE TABLE goods_browse;
+TRUNCATE TABLE chat_log;
+TRUNCATE TABLE chat_msg;
+TRUNCATE TABLE address;
+TRUNCATE TABLE admin_log;
+
+TRUNCATE TABLE orders;
+TRUNCATE TABLE order_book;
+TRUNCATE TABLE order_common;
+TRUNCATE TABLE order_goods;
+TRUNCATE TABLE order_log;
+TRUNCATE TABLE order_pay;
+TRUNCATE TABLE order_snapshot;
+TRUNCATE TABLE order_statis;
+TRUNCATE TABLE pd_cash;
+TRUNCATE TABLE points_cart;
+TRUNCATE TABLE refund_detail;
+TRUNCATE TABLE refund_reason;
+TRUNCATE TABLE refund_return;
+TRUNCATE TABLE pd_log;
+TRUNCATE TABLE pd_recharge;
+TRUNCATE TABLE seller_log;
+TRUNCATE TABLE sms_log;
+TRUNCATE TABLE sns_albumclass;
+TRUNCATE TABLE sns_albumpic;
+TRUNCATE TABLE sns_friend;
+UPDATE member
+SET
+  member_points                  = 0,
+  member_self_used_points_sum    = 0,
+  member_left_used_points_sum    = 0,
+  member_right_used_points_sum   = 0,
+  member_collision_sum_times     = 0,
+  member_collision_sum_money     = 0,
+  store_points                   = 0,
+  store_self_used_points_sum     = 0,
+  store_left_used_points_sum     = 0,
+  store_right_used_points_sum    = 0,
+  store_collision_sum_times      = 0,
+  store_collision_sum_money      = 0,
+  member_commission_money_sum    = 0,
+  store_commission_money_sum     = 0,
+  member_straight_money_sum      = 0,
+  store_straight_money_sum       = 0,
+  member_tree_left_invite_count  = 0,
+  member_tree_right_invite_count = 0,
+  store_tree_left_invite_count   = 0,
+  store_tree_right_invite_count  = 0,
+  store_share_benefits_money_sum = 0;

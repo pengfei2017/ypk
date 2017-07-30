@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1"/>
+    <title>完善资料</title>
+    <link rel="stylesheet" type="text/css" href="../../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../../css/nctouch_member.css">
+    <style type="text/css">
+        .text {
+            width: 240px;
+            height: 35px;
+            vertical-align: middle;
+        }
+
+        .title {
+            font-size: 0.6rem;
+            color: #111;
+            width: 3rem;
+        }
+
+        .form-item i {
+            color: red;
+        }
+
+        .input-box .err .error {
+            color: #ff0000 !important;
+            font-size: 0.6rem !important;
+            height: 0.6rem !important;
+            line-height: 0.6rem !important;
+            margin-top: 0rem !important;
+            margin-bottom: 0.3rem !important;
+        }
+    </style>
+</head>
+<body>
+
+<header id="header">
+    <div class="header-wrap">
+        <div class="header-l"><a href="member.html"> <i class="back"></i> </a></div>
+        <div class="header-title">
+            <h1>完善资料</h1>
+        </div>
+    </div>
+    <div class="header-r">
+        <a id="header-nav" href="javascript:void(0);"><i class="more"></i><sup></sup></a>
+    </div>
+    <div class="nctouch-nav-layout">
+        <div class="nctouch-nav-menu"><span class="arrow"></span>
+            <ul>
+                <li><a href="../../index.html"><i class="home"></i>首页</a></li>
+                <li><a href="../search.html"><i class="search"></i>搜索</a></li>
+                <li><a href="../product_first_categroy.html"><i class="categroy"></i>分类</a></li>
+                <li><a href="javascript:void(0);"><i class="message"></i>消息<sup></sup></a></li>
+                <li><a href="../cart_list.html"><i class="cart"></i>购物车<sup></sup></a></li>
+                <li><a href="../member/member.html"><i class="member"></i>我的</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div class="nctouch-main-layout fixed-Width">
+    <div class="nctouch-inp-con">
+        <form id="submitForm" action="/mobile/member_index/complete_info" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="key" value=""/>
+            <ul class="form-box">
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>真实姓名</h4>
+                    <div class="input-box">
+                        <input type="text" class="inp" name="member_truename" id="member_truename">
+                        <span class="input-del"></span>
+                        <span class="err"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>科 室</h4>
+                    <div class="input-box" style="height:auto;">
+                        <input type="text" class="inp" name="business_departments" id="business_departments">
+                        <span class="input-del"></span>
+                        <span class="err"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>职 称</h4>
+                    <div class="input-box" style="height:auto;">
+                        <input type="text" class="inp" name="business_professional" id="business_professional">
+                        <span class="input-del"></span>
+                        <span class="err"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>定点医院</h4>
+                    <div class="input-box" style="height:auto;">
+                        <input type="text" class="inp" name="business_lockHospital" id="business_lockHospital">
+                        <span class="input-del"></span>
+                        <span class="err"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;">活动医院</h4>
+                    <div class="input-box" style="height:auto;">
+                        <input type="text" class="inp" name="business_activeHospital" id="business_activeHospital">
+                        <span style="font-size: 0.6rem;">（选填，多个医院之间用英文逗号隔开）</span>
+                        <span class="input-del"></span>
+                        <span class="err"></span>
+                    </div>
+                </li>
+                <li class="form-item" style="height: 4rem;">
+                    <h4 style="text-align: left;"><i>*</i>地区</h4>
+                    <div class="input-box" style="height:auto;">
+                        <select class="province" name="province" style="margin-top: 10px;">
+                            <option value="-1">-请选择-</option>
+                        </select>
+                        <br/>
+                        <select class="city" name="city">
+                            <option value="-1">-请选择-</option>
+                        </select>
+                        <br/>
+                        <select class="county" name="county">
+                            <option value="-1">-请选择-</option>
+                        </select>
+                        <input type="hidden" class="inp" name="company_address" id="company_address">
+                        <span class="input-del"></span>
+                        <span class="err"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;"><i>*</i>详细地址</h4>
+                    <div class="input-box" style="height:auto;">
+                        <input type="text" class="inp" name="company_address_detail" id="company_address_detail">
+                        <span class="input-del"></span>
+                        <span class="err"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;">身份证号</h4>
+                    <div class="input-box" style="height:auto;">
+                        <input type="text" class="inp" name="business_idcard_number" id="business_idcard_number">
+                        <span class="input-del"></span>
+                        <span class="err"></span>
+                    </div>
+                </li>
+                <li class="form-item">
+                    <h4 style="text-align: left;">个人简介</h4>
+                    <div class="input-box" style="height:auto;">
+                        <textarea name="mail_content" id="mail_content"></textarea>
+                        <span class="input-del"></span>
+                        <span class="err"></span>
+                    </div>
+                </li>
+                <li class="form-item" style="text-align: center;font-size: 0.6rem;">
+                    <i>*</i>标注的都为必填项！
+                </li>
+                <li style="text-align: center;">
+                    <input type="button" value="提交保存" onclick="formSubmit()"
+                           style="width: 75px;height: 30px;border-radius: 7px;margin-top: 10px;margin-bottom: 10px;"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="../../js/config.js"></script>
+<script type="text/javascript" src="../../js/zepto.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/simple-plugin.js"></script>
+<script type="text/javascript" src="../../js/js_template/footer.js"></script>
+<script type="text/javascript" src="/resource/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/resource/js/jquery.validation.min.js"></script>
+<script type="text/javascript" src="../../js/js_template/member_info.js"></script>
+
+</body>
+</html>

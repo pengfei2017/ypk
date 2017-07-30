@@ -1,0 +1,123 @@
+<?php
+/**
+ * 注册为医务人员成功时，跳转到此页面上传资质证书
+ */
+?>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/jquery-1.10.2.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/jquery.validation.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/fileupload/jquery.iframe-transport.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/fileupload/jquery.ui.widget.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/fileupload/jquery.fileupload.js" charset="utf-8"></script>
+<!-- 公司信息 -->
+<style type="text/css">
+    .block{
+        display: block;
+    }
+    th i{
+        color: red;
+    }
+    .bottom{
+        text-align: center;
+    }
+    .btn{
+        display: inline-block;
+        background-color: #DCDCDC;
+        width: 100px;
+        height: 20px;
+        line-height: 20px;
+        padding: 4px 12px;
+    }
+</style>
+
+<div id="apply_company_info" class="apply-company-info" style="margin: auto;width: 778px;">
+    <div class="alert">
+        <h4>注意事项：</h4>
+        以下所需要上传的电子版资质文件仅支持jpg\jpeg\gif\png格式图片，大小请控制在10M之内，图片总大小不能超过40M。
+    </div>
+    <form id="form_company_info" method="post" enctype="multipart/form-data" >
+        <input type="hidden" name="submit" value="ok" />
+        <input type="hidden" name="member_id" value="<?php echo $output['member_id']?>" />
+        <input type="hidden" name="member_mobile" value="<?php echo $output['member_mobile']?>" />
+        <table border="0" cellpadding="0" cellspacing="0" class="all">
+            <tbody>
+            <tr>
+                <th><i>*</i>个人全身照：</th>
+                <td>
+                    <input name="business_person_body" type="file" class="w200" />
+                    <img border="0" alt="" src="<?php echo MODULE_RESOURCE;?>/images/doctor/doctorPerson.jpg" style="width:300px;height:210px">
+                    <span class="block">请上传穿白大褂的本人证件照，请确保图片清晰。</span>
+                </td>
+            </tr>
+            <tr>
+                <th><i>*</i>医师资格证书：</th>
+                <td>
+                    <input name="business_qualification_certificate" type="file" class="w200" />
+                    <img border="0" alt="" src="<?php echo MODULE_RESOURCE;?>/images/doctor/doctorQualificationCertificate.jpg" style="width:300px;height:187px">
+                    <span class="block">请上传清晰的本人医师资格证书照。</span>
+                </td>
+            </tr>
+            <tr>
+                <th><i>*</i>医师执业证书：</th>
+                <td>
+                    <input name="business_certified_certificate" type="file" class="w200" />
+                    <img border="0" alt="" src="<?php echo MODULE_RESOURCE;?>/images/doctor/doctorCertifiedCertificate.jpg" style="width:300px;height:187px">
+                    <span class="block">请上传清晰的本人医师执业证书照。</span>
+                </td>
+            </tr>
+            <tr>
+                <th>本人手持身份证半身照（选填）：</th>
+                <td>
+                    <input name="business_id_card" type="file" class="w200" />
+                    <img border="0" alt="" src="<?php echo MODULE_RESOURCE;?>/images/doctor/idCard.jpg" style="width:300px;height:187px">
+                    <span class="block">请上传清晰的本人手持身份证半身照。</span>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="20" style="text-align: center;padding-top: 20px;"><input type="submit" value="提交" style="display: inline-block;width: 100px;"/></td>
+            </tr>
+            </tfoot>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#form_company_info').validate({
+            errorPlacement: function(error, element){
+                element.nextAll('span').first().after(error);
+            },
+            rules : {
+                business_person_body: { //个人全身照
+                    required: true
+                },
+                business_qualification_certificate: { //医师资格证书
+                    required: true
+                },
+                business_certified_certificate: { //医师执业证书
+                    required: true
+                }
+            },
+            messages : {
+                business_person_body: {
+                    required: '请选择上传个人穿白大褂的全身照'
+                },
+                business_qualification_certificate:{
+                    required:'请选择上传清晰的个人医师资格证书照片'
+                },
+                business_certified_certificate:{
+                    required:'请选择清晰的个人医师执业证书照片'
+                }
+            }
+        });
+
+//        $("#btn_apply_company_next").click(function () {
+//            $("#form_company_info").submit();
+//            if($("#form_company_info").valid()) {
+//                alert(5533);
+//                $("#form_company_info").submit();
+//            }
+//        });
+    });
+</script>

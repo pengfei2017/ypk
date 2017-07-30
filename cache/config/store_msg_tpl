@@ -1,0 +1,313 @@
+a:14:{s:8:"complain";a:12:{s:8:"smt_code";s:8:"complain";s:8:"smt_name";s:21:"商品被投诉提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:86:"您售出的商品被投诉，等待商家申诉。投诉单编号：{$complain_id}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:104:"【{$site_name}】您售出的商品被投诉，等待商家申诉。投诉单编号：{$complain_id}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:107:"{$site_name}提醒：您售出的商品被投诉，等待商家申诉。投诉单编号：{$complain_id}。";s:16:"smt_mail_content";s:335:"<p>
+  {$site_name}提醒：
+</p>
+<p>
+  您售出的商品被投诉，等待商家申诉。投诉单编号：{$complain_id}。
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>
+<p>
+    <br />
+</p>";s:15:"smt_mail_forced";s:1:"0";}s:19:"goods_storage_alarm";a:12:{s:8:"smt_code";s:19:"goods_storage_alarm";s:8:"smt_name";s:18:"商品库存预警";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:84:"您的商品库存不足，请及时补货。SPU：{$common_id}，SKU：{$sku_id}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:102:"【{$site_name}】您的商品库存不足，请及时补货。SPU：{$common_id}，SKU：{$sku_id}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:66:"{$site_name}提醒：您的商品库存不足，请及时补货。";s:16:"smt_mail_content";s:553:"<p>
+ {$site_name}提醒：
+</p>
+<p>
+  您的商品库存不足，请及时补货。SPU：{$common_id}，SKU：{$sku_id}。
+</p>
+<p>
+  点击下面链接查看商品详细信息
+</p>
+<p>
+   <a href="http://{$shop_site_url}/goods/index?goods_id={$sku_id}" target="_blank">http://{$shop_site_url}/goods/index?goods_id={$sku_id}</a> 
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>
+<p>
+    <br />
+</p>
+<br />";s:15:"smt_mail_forced";s:1:"0";}s:12:"goods_verify";a:12:{s:8:"smt_code";s:12:"goods_verify";s:8:"smt_name";s:24:"商品审核失败提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:90:"您的商品没有通过管理员审核，原因：“{$remark}”。SPU：{$common_id}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:108:"【{$site_name}】您的商品没有通过管理员审核，原因：“{$remark}”。SPU：{$common_id}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:63:"{$site_name}提醒：您的商品没有通过管理员审核。";s:16:"smt_mail_content";s:331:"<p>
+   {$site_name}提醒：
+</p>
+<p>
+  您的商品没有通过管理员审核，原因：“{$remark}”。SPU：{$common_id}。
+ </p><p>
+     <br />
+  </p>
+    <p>
+     <br />
+  </p>
+    <p style="text-align:right;">
+       {$site_name}
+    </p>
+    <p style="text-align:right;">
+       {$mail_send_time}
+   </p>";s:15:"smt_mail_forced";s:1:"0";}s:15:"goods_violation";a:12:{s:8:"smt_code";s:15:"goods_violation";s:8:"smt_name";s:21:"商品违规被下架";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:78:"您的商品被违规下架，原因：“{$remark}”。SPU：{$common_id}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:96:"【{$site_name}】您的商品被违规下架，原因：“{$remark}”。SPU：{$common_id}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:51:"{$site_name}提醒：您的商品被违规下架。";s:16:"smt_mail_content";s:305:"<p>
+ {$site_name}提醒：
+</p>
+<p>
+  您的商品被违规下架。，原因：“{$remark}”。SPU：{$common_id}。
+</p>
+<p>
+ <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>
+<p>
+    <br />
+</p>";s:15:"smt_mail_forced";s:1:"0";}s:9:"new_order";a:12:{s:8:"smt_code";s:9:"new_order";s:8:"smt_name";s:15:"新订单提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:56:"您有订单需要处理，订单编号：{$order_sn}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:74:"【{$site_name}】您有订单需要处理，订单编号：{$order_sn}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:48:"{$site_name}提醒：您有订单需要处理。";s:16:"smt_mail_content";s:292:"<p>
+    {$site_name}提醒：
+</p>
+<p>
+  您有订单需要处理，订单编号：{$order_sn}。
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>
+<br />";s:15:"smt_mail_forced";s:1:"0";}s:6:"refund";a:12:{s:8:"smt_code";s:6:"refund";s:8:"smt_name";s:12:"退款提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:73:"您有一个{$type}退款单需要处理，退款编号：{$refund_sn}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:91:"【{$site_name}】您有一个{$type}退款单需要处理，退款编号：{$refund_sn}。";s:16:"smt_short_forced";s:1:"1";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:94:"{$site_name}提醒：您有一个{$type}退款单需要处理，退款编号：{$refund_sn}。";s:16:"smt_mail_content";s:323:"<p>
+  {$site_name}提醒：
+</p>
+<p>
+  您有一个{$type}退款单需要处理，退款编号：{$refund_sn}。
+</p>
+<p>
+    <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>
+<p>
+    <br />
+</p>";s:15:"smt_mail_forced";s:1:"1";}s:19:"refund_auto_process";a:12:{s:8:"smt_code";s:19:"refund_auto_process";s:8:"smt_name";s:24:"退款自动处理提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:109:"您的{$type}退款单超期未处理，已自动同意买家退款申请。退款单编号：{$refund_sn}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:127:"【{$site_name}】您的{$type}退款单超期未处理，已自动同意买家退款申请。退款单编号：{$refund_sn}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:130:"{$site_name}提醒：您的{$type}退款单超期未处理，已自动同意买家退款申请。退款单编号：{$refund_sn}。";s:16:"smt_mail_content";s:360:"<p>
+  {$site_name}提醒：
+</p>
+<p>
+   您的{$type}退款单超期未处理，已自动同意买家退款申请。退款单编号：{$refund_sn}。
+</p>
+<p>
+    <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>
+<p>
+    <br />
+</p>";s:15:"smt_mail_forced";s:1:"0";}s:6:"return";a:12:{s:8:"smt_code";s:6:"return";s:8:"smt_name";s:12:"退货提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:73:"您有一个{$type}退货单需要处理。退货编号：{$refund_sn}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:91:"【{$site_name}】您有一个{$type}退货单需要处理。退货编号：{$refund_sn}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:94:"{$site_name}提醒：您有一个{$type}退货单需要处理。退货编号：{$refund_sn}。";s:16:"smt_mail_content";s:332:"<p>
+   {$site_name}提醒：
+</p>
+<p>
+  您有一个{$type}退货单需要处理。退货编号：{$refund_sn}。
+</p>
+<p>
+    <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>
+<p>
+    <br />
+</p>
+<br />";s:15:"smt_mail_forced";s:1:"0";}s:19:"return_auto_process";a:12:{s:8:"smt_code";s:19:"return_auto_process";s:8:"smt_name";s:24:"退货自动处理提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:121:"您的{$type}退货单超期未处理，已自动同意买家退货申请（弃货）。退货单编号：{$refund_sn}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:139:"【{$site_name}】您的{$type}退货单超期未处理，已自动同意买家退货申请（弃货）。退货单编号：{$refund_sn}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:142:"{$site_name}提醒：您的{$type}退货单超期未处理，已自动同意买家退货申请（弃货）。退货单编号：{$refund_sn}。";s:16:"smt_mail_content";s:347:"<p>
+ {$site_name}提醒：
+</p>
+<p>
+  您的{$type}退货单超期未处理，已自动同意买家退货申请（弃货）。退货单编号：{$refund_sn}。
+</p>
+<p>
+    <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>";s:15:"smt_mail_forced";s:1:"0";}s:19:"return_auto_receipt";a:12:{s:8:"smt_code";s:19:"return_auto_receipt";s:8:"smt_name";s:33:"退货未收货自动处理提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:115:"您的{$type}退货单不处理收货超期未处理，已自动按弃货处理。退货单编号：{$refund_sn}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:133:"【{$site_name}】您的{$type}退货单不处理收货超期未处理，已自动按弃货处理。退货单编号：{$refund_sn}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:142:"{$site_name}提醒：您的{$type}退货单超期未处理，已自动同意买家退货申请（弃货）。退货单编号：{$refund_sn}。";s:16:"smt_mail_content";s:371:"<p>
+  {$site_name}提醒：
+</p>
+<p>
+  您的{$type}退货单超期未处理，已自动同意买家退货申请（弃货）。退货单编号：{$refund_sn}。
+</p>
+<p>
+    <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>
+<p>
+    <br />
+</p>";s:15:"smt_mail_forced";s:1:"0";}s:17:"store_bill_affirm";a:12:{s:8:"smt_code";s:17:"store_bill_affirm";s:8:"smt_name";s:27:"结算单等待确认提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:124:"您有新的结算单等待确认，开始时间：{$state_time}，结束时间：{$end_time}，结算单号：{$bill_no}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:142:"【{$site_name}】您有新的结算单等待确认，开始时间：{$state_time}，结束时间：{$end_time}，结算单号：{$bill_no}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:57:"{$site_name}提醒：您有新的结算单等待确认。";s:16:"smt_mail_content";s:388:"<p>
+ {$site_name}提醒：
+</p>
+<p>
+  您有新的结算单等待确认，起止时间：开始时间：{$state_time}，结束时间：{$end_time}，结算单号：{$bill_no}。
+</p>
+<p>
+    <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>
+<p>
+    <br />
+</p>";s:15:"smt_mail_forced";s:1:"0";}s:20:"store_bill_gathering";a:12:{s:8:"smt_code";s:20:"store_bill_gathering";s:8:"smt_name";s:27:"结算单已经付款提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:82:"您的结算单平台已付款，请注意查收，结算单编号：{$bill_no}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:100:"【{$site_name}】您的结算单平台已付款，请注意查收，结算单编号：{$bill_no}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:72:"{$site_name}提醒：您的结算单平台已付款，请注意查收。";s:16:"smt_mail_content";s:378:"<p>
+ </p><p>
+     {$site_name}提醒：
+ </p>
+
+<p>
+ 您的结算单平台已付款，请注意查收，结算单编号：{$bill_no}。
+  </p><p>
+     <br />
+  </p>
+    <p>
+     <br />
+  </p>
+    <p>
+     <br />
+  </p>
+    <p style="text-align:right;">
+       {$site_name}
+    </p>
+    <p style="text-align:right;">
+       {$mail_send_time}
+   </p>
+
+<br />";s:15:"smt_mail_forced";s:1:"0";}s:10:"store_cost";a:12:{s:8:"smt_code";s:10:"store_cost";s:8:"smt_name";s:18:"店铺消费提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:109:"您有一条新的店铺消费记录，金额：{$price}，操作人：{$seller_name}，备注：{$remark}。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:127:"【{$site_name}】您有一条新的店铺消费记录，金额：{$price}，操作人：{$seller_name}，备注：{$remark}。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:60:"{$site_name}提醒：您有一条新的店铺消费记录。";s:16:"smt_mail_content";s:338:"<p>
+    {$site_name}提醒：
+</p>
+<p>
+  您有一条新的店铺消费记录，金额：{$price}，操作人：{$seller_name}，备注：{$remark}。
+</p>
+<p>
+    <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>";s:15:"smt_mail_forced";s:1:"0";}s:12:"store_expire";a:12:{s:8:"smt_code";s:12:"store_expire";s:8:"smt_name";s:18:"店铺到期提醒";s:18:"smt_message_switch";s:1:"1";s:19:"smt_message_content";s:45:"你的店铺即将到期，请及时续期。";s:18:"smt_message_forced";s:1:"1";s:16:"smt_short_switch";s:1:"0";s:17:"smt_short_content";s:63:"【{$site_name}】你的店铺即将到期，请及时续期。";s:16:"smt_short_forced";s:1:"0";s:15:"smt_mail_switch";s:1:"0";s:16:"smt_mail_subject";s:66:"{$site_name}提醒：你的店铺即将到期，请及时续期。";s:16:"smt_mail_content";s:295:"<p>
+    {$site_name}提醒：
+</p>
+<p>
+  你的店铺即将到期，请及时续期。
+</p>
+<p>
+  <br />
+</p>
+<p>
+   <br />
+</p>
+<p>
+   <br />
+</p>
+<p style="text-align:right;">
+ {$site_name}
+</p>
+<p style="text-align:right;">
+   {$mail_send_time}
+</p>
+<p>
+    <br />
+</p>";s:15:"smt_mail_forced";s:1:"0";}}

@@ -1,0 +1,72 @@
+<form id="user_form"
+      action="<?php echo getUrl('shop_manager/reward_giveout/do_reward_giveout', array('id' => $param['member_id'])); ?>"
+      enctype="multipart/form-data" method="post">
+    <input type="hidden" name="form_submit" value="ok"/>
+    <div class="ncap-form-default">
+        <dl class="row">
+            <dt class="tit">
+                <label>会员ID</label>
+            </dt>
+            <dd class="opt"> <?php echo $param['member_id']; ?> </dd>
+        </dl>
+        <dl class="row">
+            <dt class="tit">
+                <label>会员名称</label>
+            </dt>
+            <dd class="opt"> <?php echo $param['member_avatar']; ?> </dd>
+        </dl>
+        <dl class="row">
+            <dt class="tit">
+                <label>会员账户总计（元）</label>
+            </dt>
+            <dd class="opt"> <?php echo $param['total']; ?> </dd>
+        </dl>
+        <dl class="row">
+            <dt class="tit">
+                <label>上月奖金总计（元）</label>
+            </dt>
+            <dd class="opt"> <?php echo $param['month_total_log']; ?> </dd>
+        </dl>
+        <dl class="row">
+            <dt class="tit">
+                <label>发放金额</label>
+            </dt>
+            <dd class="opt">
+                <input type="text" value="<?php echo $param['month_total_log']; ?>" id="month_total"
+                       name="month_total" class="input-txt">
+
+                <span class="err"></span>
+            </dd>
+        </dl>
+        <div class="bot"><a href="JavaScript:void(0);" class="ncap-btn-big ncap-btn-green"
+                            id="submitBtn"><?php echo $lang->_('nc_submit'); ?></a></div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        //按钮先执行验证再提交表单
+        $("#submitBtn").click(function () {
+            if ($("#user_form").valid()) {
+                $("#user_form").submit();
+            }
+        });
+        $('#user_form').validate({
+            errorPlacement: function (error, element) {
+                var error_td = element.parent('dd').children('span.err');
+                error_td.append(error);
+            },
+            rules: {
+                month_total: {
+                    required: true,
+                    number: true
+                }
+            },
+            messages: {
+                month_total: {
+                    required: '<i class="fa fa-exclamation-circle"></i>发放奖金数额不能为空',
+                    number: '<i class="fa fa-exclamation-circle"></i>发放奖金数额必须是数字'
+                }
+            }
+        });
+    });
+</script>

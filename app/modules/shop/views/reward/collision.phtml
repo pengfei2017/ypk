@@ -1,0 +1,30 @@
+<style type="text/css">
+    table {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    table tr, table th, table td {
+        /*border: solid 1px #000;*/
+        line-height: 35px;
+        height: 35px;
+        text-align: center;
+    }
+</style>
+<div class="wrap">
+    <div class="tabmenu">
+        <?php include(MODULE_PATH . '/views/common/layout/submenu.phtml'); ?>
+    </div>
+    <div class="alert">
+        <table>
+            <tr style="font-size: medium;font-weight: bold;color: #000;">
+                <th>会员名称</th>
+                <th>碰撞类型</th>
+                <th>获得积分奖奖金(元)</th>
+                <th>客户树碰撞次数</th>
+                <th>时间</th>
+            </tr>
+            <?php echo $output['str'] ?>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>奖金发放</h3>
+                <h5>商城注册会员奖金发放管理</h5>
+            </div>
+            <ul class="tab-base nc-row">
+                <li><a href="JavaScript:void(0);"
+                       class="current">奖金发放管理</a></li>
+                <li><a href="<?php echo getUrl('shop_manager/reward_giveout/reward_giveout_log') ?>">奖金发放日志</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 操作说明 -->
+    <div class="explanation" id="explanation">
+        <div class="title" id="checkZoom"><i class="fa fa-lightbulb-o"></i>
+            <h4 title="<?php echo $lang['nc_prompts_title']; ?>"><?php echo $lang['nc_prompts']; ?></h4>
+            <span id="explanationZoom" title="<?php echo $lang['nc_prompts_span']; ?>"></span>
+        </div>
+        <ul>
+            <li>奖金发放时间:每月15号结算一次，结算范围是上个月15号到本月14号</li>
+            <li>奖金发放时间是每月15号--20号（直荐奖/积分碰撞奖/分佣奖 和医务人员的分利所得)</li>
+            <li>只有每月15号--20号才显示发放奖金功能按钮</li>
+        </ul>
+    </div>
+    <div id="flexigrid"></div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#flexigrid").flexigrid({
+            url: '<?php echo getUrl('shop_manager/reward_giveout/get_xml')?>',
+            colModel: [
+                <?php if($can_giveout_reward){?>
+                {display: '操作', name: 'operation', width: 150, sortable: false, align: 'center', className: 'handle'},
+                <?php }?>
+                {display: '会员ID', name: 'member_id', width: 40, sortable: true, align: 'center'},
+                {display: '会员名称', name: 'member_avatar', width: 120, sortable: true, align: 'center'},
+                {
+                    display: '客户树直荐奖（元）',
+                    name: 'member_straight_money_sum_log',
+                    width: 120,
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    display: '客户树积分奖（元）',
+                    name: 'member_collision_sum_money_log',
+                    width: 150,
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    display: '客户树管理奖（元）',
+                    name: 'member_commission_money_sum_log',
+                    width: 120,
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    display: '医护人员树分利所得（元）',
+                    name: 'store_share_benefits_money_sum_log',
+                    width: 150,
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    display: '医护人员树直荐奖（元）',
+                    name: 'store_straight_money_sum_log',
+                    width: 150,
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    display: '医护人员树积分奖（元）',
+                    name: 'store_collision_sum_money_log',
+                    width: 160,
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    display: '医护人员树管理奖（元）',
+                    name: 'store_commission_money_sum_log',
+                    width: 150,
+                    sortable: true,
+                    align: 'center'
+                },
+                {display: '月总计（元）', name: 'month_total_log', width: 150, sortable: true, align: 'center'},
+                {display: '账户总计（元）', name: 'total', width: 150, sortable: true, align: 'center'},
+                {display: '支付宝帐号', name: 'account_pay', width: 250, sortable: true, align: 'center'},
+                {display: '微信帐号', name: 'account_wx', width: 250, sortable: true, align: 'center'},
+                {display: '银行卡帐号', name: 'account_bank', width: 500, sortable: true, align: 'center'},
+                {display: '开户行', name: 'bank_type', width: 100, sortable: true, align: 'center'},
+                {display: '银行卡类型', name: 'bank_class', width: 100, sortable: true, align: 'center'},
+                {display: '开户人姓名', name: 'bank_name', width: 100, sortable: true, align: 'center'},
+                {display: '开户行地址', name: 'bank_address', width: 500, sortable: true, align: 'center'}
+            ],
+            buttons: [
+                {
+                    display: '<i class="fa fa-file-excel-o"></i>导出数据',
+                    name: 'csv',
+                    bclass: 'csv',
+                    title: '导出Excel文件',
+                    onpress: fg_operation
+                }
+            ],
+            searchitems: [
+                {display: '会员ID', name: 'member_id'},
+                {display: '会员名称', name: 'member_name'},
+            ],
+            sortname: "member_id",
+            sortorder: "desc",
+            title: '奖金发放列表'
+        });
+    });
+
+    function fg_operation(name, bDiv) {
+        if (name == 'csv') {
+            if ($('.trSelected', bDiv).length == 0) {
+                if (!confirm('您确定要下载全部数据吗？')) {
+                    return false;
+                }
+            }
+            var itemids = new Array();
+            $('.trSelected', bDiv).each(function (i) {
+                itemids[i] = $(this).attr('data-id');
+            });
+            fg_csv(itemids);
+        }
+    }
+
+    function fg_csv(ids) {
+        id = ids.join(',');
+        window.location.href = $("#flexigrid").flexSimpleSearchQueryString('<?php echo getUrl('shop_manager/reward_giveout/export_step1');?>') + '&id=' + id;
+    }
+</script>

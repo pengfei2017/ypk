@@ -1,0 +1,94 @@
+<style type="text/css">
+    table {
+        width: 100%;
+    }
+
+    table tr, table th, table td {
+        border: solid 1px #000;
+        line-height: 35px;
+        height: 35px;
+        text-align: center;
+    }
+
+    table .page {
+        display: inline-block;
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        cursor: pointer;
+        border: solid 1px #000;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        //上一页
+        $(".pagePre").click(function () {
+            prePage($(this));
+        });
+
+        //下一页
+        $(".pageNext").click(function () {
+            nextPage($(this));
+        });
+    });
+    //上一页
+    function prePage(obj) {
+        var prePage = parseInt($(obj).attr("data-page")); //上一页页码
+        var memberId = $(obj).attr('data-memberid'); //当前会员id
+        if (prePage > 0) {
+            loadPagingList(prePage, memberId);
+            $(obj).attr("data-page", prePage - 1);
+            $(".currentPage").html(prePage);
+            $(".pageNext").attr("data-page", prePage + 1);
+        }
+    }
+
+    //下一页
+    function nextPage(obj) {
+        var nextPage = parseInt($(obj).attr("data-page")); //下一页页码
+        var totalPage = parseInt($(obj).attr("data-totalpage")); //总页码
+        var memberId = $(obj).attr('data-memberid'); //当前会员id
+
+        if (nextPage <= totalPage) {
+            loadPagingList(nextPage, memberId);
+            $(obj).attr("data-page", nextPage + 1);
+            $(".currentPage").html(nextPage);
+            $(".pagePre").attr("data-page", nextPage - 1);
+        }
+    }
+
+    //加载分页数据
+    function loadPagingList(pageIndex, memberId) {
+        $.post("<?php echo getUrl('shop/seller_center/memberlist_doctor')?>", {
+            "pageIndex": pageIndex,
+            "type": "ajax",
+            'member_id': memberId
+        }, function (data) {
+            $("table").find("tr[class='item']").remove();
+            $("table").find("tr:eq(0)").after(data);
+        }, null);
+    }
+</script>
+
+<div style="width: 973px;margin: 10px auto 0;">
+    <table>
+        <tr style="background-color: #419638;color: #fff;font-weight: bold;">
+            <th>编号</th>
+            <th>姓名</th>
+            <th>目前等级</th>
+            <th>点进查看</th>
+        </tr>
+        <?php echo $output['mapStr']; ?>
+        <tr>
+            <td colspan="4" style="text-align: center;">
+                每页25条，当前页<span class="currentPage">1</span>/<?php echo $output['totalPage'] ?>&nbsp;&nbsp;
+                <span title="上一页" class="pagePre page" data-page="0" data-memberid="<?php echo $output['member_id'] ?>">&lt;&lt;</span>&nbsp;&nbsp;
+                <span title="下一页" class="pageNext page" data-page="2"
+                      data-totalpage="<?php echo $output['totalPage'] ?>"
+                      data-memberid="<?php echo $output['member_id'] ?>">&gt;&gt;</span>
+            </td>
+        </tr>
+    </table>
+</div>

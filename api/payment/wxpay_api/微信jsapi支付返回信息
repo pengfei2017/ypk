@@ -1,0 +1,4 @@
+public $appid = 'wxc6db17459fed80db';
+    public $mchid = '10028397';
+    public $key = 'qazwsxedcrfvtgbyhnujmik123456789';
+    public $appsecret = '2214d8815d3cf9ba784e8e964d4da2df';

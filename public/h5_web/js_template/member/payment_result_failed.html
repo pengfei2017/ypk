@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1"/>
+    <title>支付结果</title>
+</head>
+<body>
+正在加载…
+<script type="text/javascript" src="../../js/zepto.min.js"></script>
+<script type="text/javascript" src="../../js/simple-plugin.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        $.sDialog({
+            skin: "red",
+            content: '是否要取消支付？',
+            okBtnText: '是',
+            cancelBtnText: '否',
+            okBtn: true,
+            cancelBtn: true,
+            okFn: function () {
+                if (/attach\=v$/.test(location.href)) {
+                    location.href = 'vr_order_list.html';
+                } else if (/attach\=r$/.test(location.href)) {
+                    location.href = 'order_list.html';
+                } else {
+                    location.href = 'predepositlog_list.html';
+                }
+            },
+            cancelFn: function () {
+
+            }
+        });
+    }
+</script>
+</body>
+</html>

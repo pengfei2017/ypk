@@ -1,0 +1,94 @@
+<link href="<?php echo MODULE_RESOURCE; ?>/css/index.css" rel="stylesheet" type="text/css">
+<script src="<?php echo RESOURCE_SITE_URL; ?>/js/waypoints.js"></script>
+<script type="text/javascript" src="<?php echo MODULE_RESOURCE; ?>/js/home_index.js" charset="utf-8"></script>
+<style type="text/css">
+    .category {
+        display: block !important;
+    }
+</style>
+
+<div class="clear"></div>
+<div class="home-focus-layout">
+    <?php echo empty($web_html) ? "" : $web_html['index_pic']; ?>
+    <div class="right-sidebar">
+        <div class="right-bannder"></div>
+        <div class="right-bannder-content">
+            <?php echo loadadv(1049); ?>
+            <?php echo loadadv(1050); ?>
+        </div>
+    </div>
+</div>
+
+
+<?php echo empty($web_html) ? "" : $web_html['index']; ?>
+
+
+
+<div class="wrapper index-brand">
+    <div class="brand-title">
+        <a href="<?php echo getUrl('shop/brand/index'); ?>">更多品牌&nbsp;&nbsp;&gt;</a>
+        <h3>推荐品牌<span>品牌汇集，一站购齐</span></h3>
+    </div>
+    <ul class="logo-list">
+        <?php if (!empty($brand_r)) { ?>
+            <?php foreach ($brand_r as $key => $brand_r) { ?>
+                <li>
+                    <a target="_blank"
+                       href="<?php echo getUrl('shop/brand/list', array('brand' => $brand_r['brand_id'])); ?>"
+                       alt="<?php echo $brand_r['brand_name']; ?>" title="<?php echo $brand_r['brand_name']; ?>">
+                        <img width="120" height="40" src="<?php echo brandImage($brand_r['brand_pic']); ?>">
+                        <span>
+                <?php echo $brand_r['brand_name']; ?>
+            </span>
+                    </a>
+                </li>
+            <?php }
+        } ?>
+    </ul>
+</div>
+
+<div class="clear"></div>
+
+<div class="wrapper">
+    <div class="mt20"><?php echo loadadv(9, 'html'); ?></div>
+</div>
+
+<div class="index-link wrapper">
+    <dl class="website">
+        <dt>合作伙伴 | 友情链接<b></b></dt>
+        <dd>
+            <?php
+            if (is_array($link_list) && !empty($link_list)) {
+                foreach ($link_list as $val) {
+                    if ($val['link_pic'] == '') {
+                        ?>
+                        <a href="<?php echo $val['link_url']; ?>" target="_blank"
+                           title="<?php echo $val['link_title']; ?>"><?php echo str_cut($val['link_title'], 15); ?></a>
+                        <?php
+                    }
+                }
+            }
+            ?>
+        </dd>
+    </dl>
+</div>
+
+<?php if (getConfig('lc_open')) { ?>
+    <div id="nav_box">
+        <ul>
+
+            <?php if (isset($lc_list) && is_array($lc_list) && !empty($lc_list)) {
+                $i = 0 ?>
+                <?php foreach ($lc_list as $v) {
+                    $i++ ?>
+                    <li class="nav_h_<?php echo $i; ?> <?php if ($i == 1) echo 'hover' ?>">
+                        <a href="javascript:;" class="num"><?php echo $v['value'] ?></a>
+                        <a href="javascript:;" class="word"><?php echo $v['name'] ?></a>
+                    </li>
+                <?php }
+            } ?>
+        </ul>
+    </div>
+<?php } ?>
+
+

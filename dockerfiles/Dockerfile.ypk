@@ -1,0 +1,18 @@
+FROM hepengfei2017/phalcon
+
+LABEL hepengfei <1149426299@qq.com>
+
+# 这个文件也可以用这行命令代替docker run -it --rm --name my-maven-project -v "$PWD":/usr/src/mymaven -w /usr/src/mymaven maven:3.2-jdk-7 mvn clean install
+
+ADD . /var/www/html
+
+WORKDIR /var/www/html
+
+RUN chmod -R 777 ./*
+
+EXPOSE 80
+
+CMD ["apache2-foreground"]
+
+# docker build -f ./dockerfiles/Dockerfile.ypk -t hepengfei2017/ypk:latest .
+# docker run -it -p 80:80 hepengfei2017/ypk:latest bash
