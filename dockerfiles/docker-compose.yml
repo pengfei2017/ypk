@@ -34,7 +34,7 @@ services:
         # open ports for apache and remote debugging
         ports:
             - "80:80"
-            #- "9000:9000"
+            - "9000:9000"
         networks:
             - ypk-net
         deploy:

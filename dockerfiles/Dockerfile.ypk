@@ -10,7 +10,7 @@ WORKDIR /var/www/html
 
 RUN chmod -R 777 ./*
 
-EXPOSE 80
+EXPOSE 80 9000
 
 CMD ["apache2-foreground"]
 
