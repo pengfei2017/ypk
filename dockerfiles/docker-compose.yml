@@ -6,7 +6,7 @@ services:
         build:
             context: ../database
             dockerfile: Dockerfile
-        #image: hepengfei2017/ypk-database:latest
+        image: hepengfei2017/ypk-database:latest
         volumes:
             - YpkData:/var/lib/mysql
         # set default mysql root password, change as needed
@@ -38,7 +38,7 @@ services:
         build:
             context: ../
             dockerfile: ./dockerfiles/Dockerfile.ypk
-        #image: hepengfei2017/ypk-web:latest
+        image: hepengfei2017/ypk-web:latest
         environment:
             PHP_XDEBUG_ENABLED: 1 # Set on to enable.
             XDEBUG_CONFIG: remote_host=192.168.100.105 #手工配置一下 sudo ifconfig en0 alias 10.254.254.254 255.255.255.0
