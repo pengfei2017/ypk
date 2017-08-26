@@ -3,7 +3,7 @@ FROM hepengfei2017/phalcon
 LABEL hepengfei <1149426299@qq.com>
 
 # 这个文件也可以用这行命令代替docker run -it --rm --name my-maven-project -v "$PWD":/usr/src/mymaven -w /usr/src/mymaven maven:3.2-jdk-7 mvn clean install
-ADD ./xdebug-config/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+ADD ./docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 ADD . /var/www/html
 
 WORKDIR /var/www/html

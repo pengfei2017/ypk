@@ -5,8 +5,8 @@ services:
     ypk-database:
         build:
             context: ../database
-            dockerfile: ../database/Dockerfile
-        image: hepengfei2017/ypk-database:latest
+            dockerfile: Dockerfile
+        #image: hepengfei2017/ypk-database:latest
         volumes:
             - YpkData:/var/lib/mysql
         # set default mysql root password, change as needed
@@ -18,21 +18,39 @@ services:
         networks:
             - ypk-net
 
+    redis-server:
+        image: redis:alpine
+        ports:
+            - "6379"
+        networks:
+            - ypk-net
+        deploy:
+            restart_policy:
+                condition: any
+            mode: replicated
+            replicas: 1
+            update_config:
+                delay: 2s
+            placement:
+                constraints: [node.role == manager]
+
     ypk-server:
         build:
-            context: ./
-            dockerfile: ./dockerfiles/Dockerfile.ypk
-        image: hepengfei2017/ypk-web:latest
+            context: ../
+            dockerfile: Dockerfile.ypk
+        #image: hepengfei2017/ypk-web:latest
         environment:
-            PHP_XDEBUG_ENABLED: on # Set on to enable.
+            PHP_XDEBUG_ENABLED: 1 # Set on to enable.
             XDEBUG_CONFIG: remote_host=10.254.254.254 #手工配置一下 sudo ifconfig en0 alias 10.254.254.254 255.255.255.0
         volumes:
             - YpkFiles:/var/www/html/public/files
         depends_on:
             - ypk-database
+            - redis-server
         # open ports for apache and remote debugging
         ports:
             - "80:80"
+            - "9000:9000"
         networks:
             - ypk-net
 
