@@ -39,9 +39,9 @@ services:
             context: ../
             dockerfile: ./dockerfiles/Dockerfile.ypk
         image: hepengfei2017/ypk-web:latest
-        #environment:
-            #PHP_XDEBUG_ENABLED: 1 # Set on to enable.
-            #XDEBUG_CONFIG: remote_host=192.168.100.105 #手工配置一下 sudo ifconfig en0 alias 10.254.254.254 255.255.255.0
+        environment:
+            PHP_XDEBUG_ENABLED: 1 # Set on to enable.
+            XDEBUG_CONFIG: remote_host=192.168.100.105
         volumes:
             - YpkFiles:/var/www/html/public/files
         depends_on:
