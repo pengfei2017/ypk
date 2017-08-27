@@ -20,14 +20,17 @@ RUN set -xe && \
 curl -LO https://github.com/phalcon/cphalcon/archive/v${PHALCON_VERSION}.tar.gz && \
 tar xzf v${PHALCON_VERSION}.tar.gz && cd cphalcon-${PHALCON_VERSION}/build && ./install && \
 docker-php-ext-enable phalcon && \
-cd ../.. && rm -rf v${PHALCON_VERSION}.tar.gz cphalcon-${PHALCON_VERSION} && \
 # Insall Phalcon Devtools, see https://github.com/phalcon/phalcon-devtools/
 curl -LO https://github.com/phalcon/phalcon-devtools/archive/v${PHALCON_DEV_TOOLS_VERSION}.tar.gz && \
 tar xzf v${PHALCON_DEV_TOOLS_VERSION}.tar.gz && \
 mv phalcon-devtools-${PHALCON_DEV_TOOLS_VERSION} /usr/local/phalcon-devtools && \
-ln -s /usr/local/phalcon-devtools/phalcon.php /usr/local/bin/phalcon && \
-cd /usr/local/phalcon-devtools/ide && \
-php gen-stubs.php #生成phalcon-devtools源文件
+ln -s /usr/local/phalcon-devtools/phalcon.php /usr/local/bin/phalcon
+# 生成phalcon-devtools的源码库包
+RUN cd /usr/local/phalcon-devtools/ide/ && \
+sed -ig 's:/Users/micate/Code/cphalcon/ext/:/var/www/html/cphalcon-${PHALCON_VERSION}/ext/:' gen-stubs.php && \
+php gen-stubs.php && \
+# 删除没编译前的phalcon源码包
+cd /var/www/html && rm -rf v${PHALCON_VERSION}.tar.gz cphalcon-${PHALCON_VERSION} && \
 
 # 用PECL（PHP 扩展库仓库）安装php插件的工具包，该处安装redis扩展和xdebug扩展并启用这两个扩展
 RUN pecl install igbinary && docker-php-ext-enable igbinary
