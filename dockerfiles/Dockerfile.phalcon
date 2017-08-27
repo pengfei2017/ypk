@@ -47,3 +47,4 @@ CMD ["apache2-foreground"]
 # COPY config/php.ini /usr/local/etc/php/
 
 # docker build -f ./dockerfiles/Dockerfile.phalcon -t hepengfei2017/phalcon:latest .
+# docker push hepengfei2017/phalcon:latest
