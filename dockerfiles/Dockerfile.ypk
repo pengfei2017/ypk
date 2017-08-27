@@ -4,6 +4,7 @@ LABEL hepengfei <1149426299@qq.com>
 
 # 这个文件也可以用这行命令代替docker run -it --rm --name my-maven-project -v "$PWD":/usr/src/mymaven -w /usr/src/mymaven maven:3.2-jdk-7 mvn clean install
 ADD ./apache/apache2.conf /etc/apache2/apache2.conf
+ADD ./apache/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 ADD ./xdebug-config/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 ADD . /var/www/html
 
