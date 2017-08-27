@@ -1,4 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
+lib/phalcon/
 public/files/
 api/oss/docs/
 api/oss/logs/

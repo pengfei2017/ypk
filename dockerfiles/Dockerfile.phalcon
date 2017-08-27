@@ -25,7 +25,9 @@ cd ../.. && rm -rf v${PHALCON_VERSION}.tar.gz cphalcon-${PHALCON_VERSION} && \
 curl -LO https://github.com/phalcon/phalcon-devtools/archive/v${PHALCON_DEV_TOOLS_VERSION}.tar.gz && \
 tar xzf v${PHALCON_DEV_TOOLS_VERSION}.tar.gz && \
 mv phalcon-devtools-${PHALCON_DEV_TOOLS_VERSION} /usr/local/phalcon-devtools && \
-ln -s /usr/local/phalcon-devtools/phalcon.php /usr/local/bin/phalcon
+ln -s /usr/local/phalcon-devtools/phalcon.php /usr/local/bin/phalcon && \
+cd /usr/local/phalcon-devtools/ide && \
+php gen-stubs.php #生成phalcon-devtools源文件
 
 # 用PECL（PHP 扩展库仓库）安装php插件的工具包，该处安装redis扩展和xdebug扩展并启用这两个扩展
 RUN pecl install igbinary && docker-php-ext-enable igbinary
