@@ -12,14 +12,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
 
-# 用PECL（PHP 扩展库仓库）安装php插件的工具包，该处安装redis扩展和xdebug扩展并启用这两个扩展
-RUN pecl install igbinary && docker-php-ext-enable igbinary
-RUN pecl install redis \
-    && pecl install xdebug \
-    && docker-php-ext-enable redis xdebug
-
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-
 ENV PHALCON_VERSION=3.2.1
 ENV PHALCON_DEV_TOOLS_VERSION=3.2.0
 
@@ -32,12 +24,21 @@ docker-php-ext-enable phalcon && \
 curl -LO https://github.com/phalcon/phalcon-devtools/archive/v${PHALCON_DEV_TOOLS_VERSION}.tar.gz && \
 tar xzf v${PHALCON_DEV_TOOLS_VERSION}.tar.gz && \
 mv phalcon-devtools-${PHALCON_DEV_TOOLS_VERSION} /usr/local/phalcon-devtools && \
-ln -s /usr/local/phalcon-devtools/phalcon.php /usr/local/bin/phalcon && \
-# 生成phalcon-devtools的ide源码库
-sed -ig 's:/Users/micate/Code/cphalcon/ext/:/var/www/html/cphalcon-3.2.1/ext/:g' /usr/local/phalcon-devtools/ide/gen-stubs.php && \
-php /usr/local/phalcon-devtools/ide/gen-stubs.php && \
-# 删除编译成phalcon.so前的phalcon源代码
-cd ../.. && rm -rf v${PHALCON_VERSION}.tar.gz cphalcon-${PHALCON_VERSION}
+ln -s /usr/local/phalcon-devtools/phalcon.php /usr/local/bin/phalcon
+# 生成phalcon-devtools的源码库包
+RUN cd /usr/local/phalcon-devtools/ide/ && \
+sed -ig 's:/Users/micate/Code/cphalcon/ext/:/var/www/html/cphalcon-3.2.1/ext/:' gen-stubs.php && \
+php gen-stubs.php && \
+# 删除没编译前的phalcon源码包
+cd /var/www/html && rm -rf v${PHALCON_VERSION}.tar.gz cphalcon-${PHALCON_VERSION}
+
+# 用PECL（PHP 扩展库仓库）安装php插件的工具包，该处安装redis扩展和xdebug扩展并启用这两个扩展
+RUN pecl install igbinary && docker-php-ext-enable igbinary
+RUN pecl install redis \
+    && pecl install xdebug \
+    && docker-php-ext-enable redis xdebug
+
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # 开启rewrite模块
 RUN a2enmod rewrite
