@@ -34,6 +34,17 @@ services:
             placement:
                 constraints: [node.role == manager]
 
+    node-chat-server:
+        build:
+            context: ../node_chat_server
+            dockerfile: Dockerfile
+        image: hepengfei2017/node-chat-server:latest
+        # Expose port 3306 to host. Not for the application
+        ports:
+            - "8880:8880"
+        networks:
+            - ypk-net
+
     ypk-server:
         build:
             context: ../
@@ -44,6 +55,7 @@ services:
         depends_on:
             - ypk-database
             - redis-server
+            - node-chat-server
         # open ports for apache and remote debugging
         ports:
             - "80:80"
