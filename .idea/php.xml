@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/lib/phalcon/ide" />
+    </include_path>
+  </component>
   <component name="PhpInterpreters">
     <interpreters>
       <interpreter home="docker://hepengfei2017/phalcon:latest/php" id="d98c1c47-aee7-4cdd-88fb-cb857264ba42" name="hepengfei2017/phalcon:latest" debugger_id="php.debugger.XDebug">
