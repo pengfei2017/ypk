@@ -39,7 +39,9 @@ services:
             context: ../node_chat_server
             dockerfile: Dockerfile
         image: hepengfei2017/node-chat-server:latest
-        # Expose port 3306 to host. Not for the application
+        depends_on:
+            - ypk-database
+        # Expose port 8096 to host. Not for the application
         ports:
             - "8096:8096"
         networks:
