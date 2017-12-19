@@ -8,7 +8,7 @@ WORKDIR /im
 
 EXPOSE 8096
 
-CMD ["node","chat.js"]
+CMD ["node","-v"]
 
 
 # docker build -f Dockerfile -t node_chat_server .
