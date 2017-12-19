@@ -92,10 +92,10 @@ class LoginController extends BaseLoginController
             $this->view->setVar('html_title', getConfig('site_name') . ' - ' . $this->translation->_('login_index_login'));
             if ($_GET['inajax'] == 1) {
                 //Tpl::showpage('login_inajax','null_layout'); //ajax请求登录的时候调用
-                $this->view->pick('Login/login_inajax');
+                $this->view->pick('login/login_inajax');
             } else {
                 $this->view->setVar("hidden_login", "login");
-                $this->view->pick('Login/login');
+                $this->view->pick('login/login');
             }
         }
     }
