@@ -26,7 +26,7 @@ use Ypk\UploadFile;
  *
  * 商城-设置-首页管理
  */
-class WebconfigController extends ControllerBase
+class WebConfigController extends ControllerBase
 {
 
     public function initialize()
