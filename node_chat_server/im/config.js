@@ -4,6 +4,7 @@
 var config = {};//数据库帐号设置
 
 //config['host'] = '180.76.141.156';//数据库地址
+//config['host'] = 'ypk-database';//数据库地址
 config['host'] = 'ypk-database';//数据库地址
 config['port'] = '3306';//数据库端口
 config['user'] = 'root';//数据库用户名
