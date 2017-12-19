@@ -8,9 +8,9 @@ WORKDIR /im
 
 EXPOSE 8096
 
-CMD ["node","-v"]
+CMD ["node","chat.js"]
 
 
 # docker build -f Dockerfile -t node_chat_server .
-# docker run -it -p 3306:3306 node_chat_server bash
-# docker run -it node_chat_server bash
+# docker network ls
+# docker run --network=dockerfiles_ypk-net -it node_chat_server
