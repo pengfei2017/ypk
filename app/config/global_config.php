@@ -16,7 +16,7 @@ $global_config['lc_open'] = true;//如果要启用商城首页楼层导航，把
 
 $global_config['node_chat'] = true;//如果要启用IM，把false修改为true
 $global_config['chat_site_url'] = '/chat';
-$global_config['node_site_url'] = 'http://localhost:8096'; //如果要启用IM，把 developer.site 修改为您的node服务器IP
+$global_config['node_site_url'] = 'http://node-chat-server:8096'; //如果要启用IM，把 developer.site 修改为您的node服务器IP
 
 $global_config['delivery_site_url'] = '/delivery';
 $global_config['chain_site_url'] = '/chain';
