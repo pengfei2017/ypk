@@ -1866,7 +1866,7 @@ type_id</ColNames>
     </column>
     <column id="460" parent="25" name="show_type">
       <Position>11</Position>
-      <Comment>品牌展示类型 0表示图片 1表示文字 </Comment>
+      <Comment>品牌展示类型 0表示图片 1表示文字</Comment>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
@@ -3970,7 +3970,7 @@ reply_id</ColNames>
     </column>
     <column id="809" parent="54" name="article_publisher_name">
       <Position>23</Position>
-      <Comment>发布者用户名 </Comment>
+      <Comment>发布者用户名</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
@@ -4127,7 +4127,7 @@ reply_id</ColNames>
     </key>
     <column id="834" parent="56" name="class_id">
       <Position>1</Position>
-      <Comment>分类编号 </Comment>
+      <Comment>分类编号</Comment>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
@@ -4604,7 +4604,7 @@ reply_id</ColNames>
     </key>
     <column id="912" parent="65" name="class_id">
       <Position>1</Position>
-      <Comment>分类编号 </Comment>
+      <Comment>分类编号</Comment>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
@@ -7663,7 +7663,7 @@ member_id</ColNames>
     </key>
     <column id="1429" parent="106" name="gift_id">
       <Position>1</Position>
-      <Comment>赠品id </Comment>
+      <Comment>赠品id</Comment>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
@@ -7682,7 +7682,7 @@ member_id</ColNames>
     </column>
     <column id="1432" parent="106" name="gift_goodsid">
       <Position>4</Position>
-      <Comment>赠品商品id </Comment>
+      <Comment>赠品商品id</Comment>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
@@ -8334,7 +8334,7 @@ member_id</ColNames>
     </column>
     <column id="1542" parent="116" name="inform_subject_type_name">
       <Position>4</Position>
-      <Comment>举报类型名称 </Comment>
+      <Comment>举报类型名称</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
@@ -8358,7 +8358,7 @@ member_id</ColNames>
     </column>
     <column id="1546" parent="117" name="inform_type_name">
       <Position>2</Position>
-      <Comment>举报类型名称 </Comment>
+      <Comment>举报类型名称</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
@@ -10407,7 +10407,7 @@ member_id</ColNames>
     </column>
     <column id="1916" parent="147" name="message_ismore">
       <Position>14</Position>
-      <Comment>站内信是否为一条发给多个用户 0为否 1为多条 </Comment>
+      <Comment>站内信是否为一条发给多个用户 0为否 1为多条</Comment>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
@@ -10630,7 +10630,7 @@ member_id</ColNames>
     </key>
     <column id="1954" parent="151" name="class_id">
       <Position>1</Position>
-      <Comment>分类编号 </Comment>
+      <Comment>分类编号</Comment>
       <DataType>int(11) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
@@ -10859,7 +10859,7 @@ member_id</ColNames>
     </key>
     <column id="1991" parent="156" name="class_id">
       <Position>1</Position>
-      <Comment>分类编号 </Comment>
+      <Comment>分类编号</Comment>
       <DataType>int(11) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
@@ -12239,7 +12239,7 @@ member_id</ColNames>
     </key>
     <column id="2219" parent="176" name="cg_id">
       <Position>1</Position>
-      <Comment>推荐组合id </Comment>
+      <Comment>推荐组合id</Comment>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
@@ -18111,7 +18111,7 @@ store_id</ColNames>
     </column>
     <column id="3216" parent="260" name="wm_image_transition">
       <Position>5</Position>
-      <Comment>水印图片与原图片的融合度 </Comment>
+      <Comment>水印图片与原图片的融合度</Comment>
       <DataType>int(3)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;20&apos;</DefaultExpression>
