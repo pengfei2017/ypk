@@ -226,12 +226,13 @@ CREATE TABLE `adv_position` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='广告位表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-
 --
--- 转存表中的数据 `33hao_adv_position`
+-- Dumping data for table `adv_position`
 --
 
-INSERT INTO `33hao_adv_position` (`ap_id`, `ap_name`, `ap_class`, `ap_display`, `is_use`, `ap_width`, `ap_height`, `adv_num`, `click_num`, `default_content`) VALUES
+LOCK TABLES `adv_position` WRITE;
+/*!40000 ALTER TABLE `adv_position` DISABLE KEYS */;
+INSERT INTO `adv_position` (`ap_id`, `ap_name`, `ap_class`, `ap_display`, `is_use`, `ap_width`, `ap_height`, `adv_num`, `click_num`, `default_content`) VALUES
 (9, '首页底部通栏图片广告', 0, 2, 1, 1200, 90, 1, 0, '04418235791378401.jpg'),
 (11, '首页中上部banner', 0, 2, 1, 1200, 100, 1, 0, 'banner.gif'),
 (35, '积分列表页中部广告位', 0, 2, 1, 900, 368, 0, 0, 'f448e48ee0deb06707480d46a2a360ae.gif'),
@@ -246,15 +247,6 @@ INSERT INTO `33hao_adv_position` (`ap_id`, `ap_name`, `ap_class`, `ap_display`, 
 (1048, '顶部logo边广告', 0, 2, 1, 100, 70, 0, 0, '05048168915006375.gif'),
 (1049, '首页右侧广告1', 0, 1, 1, 180, 194, 0, 0, '05193052323128277.jpg'),
 (1050, '首页右侧广告2', 0, 1, 1, 180, 194, 0, 0, '05193052753284411.jpg');
-
--- --------------------------------------------------------
-
---
--- Dumping data for table `adv_position`
---
-
-LOCK TABLES `adv_position` WRITE;
-/*!40000 ALTER TABLE `adv_position` DISABLE KEYS */;
 /*!40000 ALTER TABLE `adv_position` ENABLE KEYS */;
 UNLOCK TABLES;
 
