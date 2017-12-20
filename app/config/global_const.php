@@ -26,7 +26,7 @@ if (!is_file(BASE_PATH . "/public/install/lock") && is_file(BASE_PATH . "/public
 /**
  * layout目录定义
  */
-define("SHOP_LAYOUT_DIR", "/common/layout/"); //商城模版目录
+define("SHOP_LAYOUT_DIR", "common/layout/"); //商城模版目录
 
 /**
  * 附件上传目录定义

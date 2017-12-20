@@ -1,4 +1,5 @@
 <?php
+
 namespace Ypk\Modules\Shop\Controllers;
 
 use Phalcon\Mvc\Controller;
@@ -20,7 +21,7 @@ class IndexController extends BaseHomeController
 {
     public function initialize()
     {
-		//exit('系统升级中......');
+        //exit('系统升级中......');
 //        $a=new Sms();
 //        $a->send('15890614693','您已成功购买"测试支付宝支付"服务，编号是：260号【测试支付宝支付】');
 //        exit;
@@ -48,14 +49,14 @@ class IndexController extends BaseHomeController
         //$this->view->setVar("is_goods ",false);
 
         //抢购专区
-//        $model_groupbuy = Model('groupbuy');
-//        $group_list = $model_groupbuy->getGroupbuyCommendedList(4);
-//        $this->view->setVar('group_list', $group_list);
+        $model_groupbuy = Model('groupbuy');
+        $group_list = $model_groupbuy->getGroupbuyCommendedList(4);
+        $this->view->setVar('group_list', $group_list);
 
         //专题获取
-//        $model_special = Model('cms_special');
-//        $special_list = $model_special->getShopindexList($conition);
-//        Tpl::output('special_list', $special_list);
+        $model_special = Model('cms_special');
+        $special_list = $model_special->getShopindexList($conition);
+        Tpl::output('special_list', $special_list);
 
         //友情链接
         $model_link = Model('link');
