@@ -12,6 +12,11 @@ use Ypk\Tpl;
 
 class StoreListController extends BaseHomeController
 {
+    public function initialize()
+    {
+        parent::initialize();
+    }
+    
     public function indexAction()
     {
         //读取语言包

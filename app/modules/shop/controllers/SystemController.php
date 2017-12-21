@@ -12,6 +12,11 @@ use Ypk\Tpl;
 
 class SystemController extends BaseHomeController
 {
+    public function initialize()
+    {
+        parent::initialize();
+    }
+
     /**
      * 此页面只显示平台发布的产品
      */
