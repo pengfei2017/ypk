@@ -170,7 +170,39 @@ if (strpos($agent, "comFront") || strpos($agent, "iPhone") || strpos($agent, "MI
 <!--            </div>-->
         <?php } ?>
         <div id="nav" class="ncs-nav">
-
+            <ul>
+                <?php if(!empty($output['goods_class_list'])){?>
+                    <li id="store_nav_class_button" class="normal ncs-nav-classes">
+                        <!-- 店铺商品分类 -->
+                        <a href="javascript:;"><span>站内所有分类<i></i></span></a>
+                        <ul id="store_nav_class_menu" class="classes-menu" style="display:none;">
+                            <?php if(!empty($output['goods_class_list']) && is_array($output['goods_class_list'])){?>
+                                <?php foreach($output['goods_class_list'] as $value){?>
+                                    <li class="store-nav-class-sub-menu"><a href="<?php echo getUrl('show_store/goods_all', array('store_id' => $output['store_info']['store_id'], 'stc_id' => $value['stc_id']));?>" title="<?php echo $value['stc_name'];?>"><i></i><?php echo $value['stc_name'];?></a>
+                                        <?php if(!empty($value['children']) && is_array($value['children'])){?>
+                                            <ul class="store-nav-class-menu-item" style="display:none;">
+                                                <?php foreach($value['children'] as $value1){?>
+                                                    <li><a href="<?php echo getUrl('show_store/goods_all', array('store_id' => $output['store_info']['store_id'], 'stc_id' => $value1['stc_id']));?>" title="<?php echo $value1['stc_name'];?>"><i></i><?php echo $value1['stc_name'];?></a></li>
+                                                <?php }?>
+                                            </ul>
+                                        <?php }?>
+                                    </li>
+                                <?php }?>
+                            <?php }?>
+                        </ul>
+                    </li>
+                <?php }?>
+                <li class="<?php if($output['page'] == 'index'){?>active<?php }else{?>normal<?php }?>"><a href="<?php echo getUrl('show_store/index', array('store_id'=>$output['store_info']['store_id']));?>"><span><?php echo $lang['nc_store_index'];?><i></i></span></a></li>
+                <?php if(!empty($output['store_navigation_list'])){
+                    foreach($output['store_navigation_list'] as $value){
+                        if($value['sn_if_show']) {
+                            if($value['sn_url'] != ''){?>
+                                <li class="<?php if($output['page'] == $value['sn_id']){?>active<?php }else{?>normal<?php }?>"><a href="<?php echo $value['sn_url']; ?>" <?php if($value['sn_new_open']){?>target="_blank"<?php }?>><span><?php echo $value['sn_title'];?><i></i></span></a></li>
+                            <?php }else{ ?>
+                                <li class="<?php if($output['page'] == $value['sn_id']){?>active<?php }else{?>normal<?php }?>"><a href="<?php echo getUrl('show_store/show_article', array('store_id' => $output['store_info']['store_id'], 'sn_id' => $value['sn_id']));?>"><span><?php echo $value['sn_title'];?><i></i></span></a></li>
+                            <?php }}}} ?>
+                <li class="<?php if ($output['page'] == 'store_sns') {?>active<?php }else{?>normal<?php }?>"><a href="<?php echo getUrl('store_snshome/index', array('sid' => $output['store_info']['store_id']))?>"><span>店铺动态<i></i></span></a></li>
+            </ul>
         </div>
     </div>
 </div>
